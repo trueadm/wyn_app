@@ -18,6 +18,6 @@ if (Ti.version < 1.8 ) {
 // This is a single context application with mutliple windows in a stack
 (function() {
 
-	var MainTabGroup = require('ui/common/MainTabGroup');
+	var MainTabGroup = require('ui/MainTabGroup');
 	new MainTabGroup().open();
 })();

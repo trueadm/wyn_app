@@ -3,11 +3,14 @@ function MainTabGroup() {
 	var self = Ti.UI.createTabGroup();
 	
 	//init the windows for each tab
-	var NewNumberWindow = require('ui/common/NewNumberWindow');
+	var NewNumberWindow = require('ui/NewNumberWindow');
 	self.newNumberWindow = new NewNumberWindow(self);
 	
-	var MyNumbersWindow = require('ui/common/MyNumbersWindow');
+	var MyNumbersWindow = require('ui/MyNumbersWindow');
 	self.myNumbersWindow = new MyNumbersWindow(self);
+	
+	var SettingsWindow = require('ui/SettingsWindow');
+	self.settingsWindow = new SettingsWindow(self);	
 	
 	//create app tabs
 	var tab1 = Ti.UI.createTab({
@@ -24,8 +27,16 @@ function MainTabGroup() {
 	});
 	self.newNumberWindow.containingTab = tab2;
 	
+	var tab3 = Ti.UI.createTab({
+		title: L('Settings'),
+		icon: '/images/KS_nav_views.png',
+		window: self.settingsWindow
+	});
+	self.settingsWindow.containingTab = tab3;	
+	
 	self.addTab(tab1);
 	self.addTab(tab2);
+	self.addTab(tab3);
 	
 	return self;
 };
