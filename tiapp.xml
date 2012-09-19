@@ -13,8 +13,8 @@
     <version>1.0</version>
     <publisher>ADM</publisher>
     <url>http://www.101010digital.com</url>
-    <description>not specified</description>
-    <copyright>2012 by ADM</copyright>
+    <description>What's Your Number</description>
+    <copyright>2012 by 101010 Digital</copyright>
     <icon>appicon.png</icon>
     <persistent-wifi>false</persistent-wifi>
     <prerendered-icon>false</prerendered-icon>
@@ -22,7 +22,7 @@
     <statusbar-hidden>false</statusbar-hidden>
     <fullscreen>false</fullscreen>
     <navbar-hidden>false</navbar-hidden>
-    <analytics>true</analytics>
+    <analytics>false</analytics>
     <guid>5d63c6c8-79c2-411e-955d-97748b00f944</guid>
     <property name="ti.ui.defaultunit">system</property>
     <iphone>
