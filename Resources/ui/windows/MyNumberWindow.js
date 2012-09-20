@@ -1,10 +1,23 @@
 function MyNumberWindow(parentWindow) {
+	
+
 	var self = Ti.UI.createWindow({
 		title:'My Number',
 		backgroundColor:'#eee',
 		parentWindow: parentWindow,
 		barColor: '#0ba711',
 	});
+	
+	//add buttons to title bar so we can switch templates of this page
+	var previousButton = Ti.UI.createButton({
+	    title: 'Prev'
+	});
+	self.leftNavButton = previousButton;
+	
+	var nextButton = Ti.UI.createButton({
+	    title: 'Next'
+	});	
+	self.rightNavButton = nextButton;
 	
 	var scrollView = Titanium.UI.createScrollView({
 	    contentHeight:'auto',
