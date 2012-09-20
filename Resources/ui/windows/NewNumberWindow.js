@@ -70,19 +70,6 @@ function NewNumberWindow(parentWindow) {
 	});
 	self.add(saveButton);
 	
-	//we need to add the plus icon to the button to make it seem 'authentic' 
-	//like the iPhone's numpad one is. we use a view for this.
-	/* Removed as wasn't sure about it
-	var buttonIconView = Ti.UI.createView({
-		backgroundImage: 'images/button_add_icon.png',
-		width: 17,
-		height: 18,
-		left: 18,
-		top: 18,
-	});
-	saveButton.add(buttonIconView);
-	*/
-	
 	//we use a label as we have better control over how it looks via the title of a button
 	var buttonTextLabel = Ti.UI.createLabel({
 		text: 'Save',
