@@ -5,7 +5,7 @@ reporting an issue to help us understand your environment, build settings
 and aid in debugging. Please attach this log to any issue that you report.
 ================================================================================
 
-Starting build at 09/19/12 15:53
+Starting build at 09/20/12 15:33
 
 Build details:
 
@@ -18,7 +18,7 @@ Build details:
 Script arguments:
    /Users/ADM/Library/Application Support/Titanium/mobilesdk/osx/2.1.2.GA/iphone/builder.py
    simulator
-   5.1
+   6.0
    /Volumes/StorageVol/Titanium/Workspaces/WYN
    com.internal.wyn
    WYN
@@ -27,7 +27,7 @@ Script arguments:
    
 
 Building from: /Users/ADM/Library/Application Support/Titanium/mobilesdk/osx/2.1.2.GA/iphone
-Platform: Darwin Kernel Version 12.1.0: Tue Aug 14 13:29:55 PDT 2012; root:xnu-2050.9.2~1/RELEASE_X86_64
+Platform: Darwin Kernel Version 12.2.0: Sat Aug 25 00:48:52 PDT 2012; root:xnu-2050.18.24~1/RELEASE_X86_64
 
 Xcode path is: /Applications/Xcode.app/Contents/Developer
 

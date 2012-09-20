@@ -1,8 +1,9 @@
-function MyNumbersWindow(parentWindow) {
+function SettingsWindow(parentWindow) {
 	var self = Ti.UI.createWindow({
-		title:'My Numbers',
+		title:'Settings',
 		backgroundColor:'white',
-		parentWindow: parentWindow
+		parentWindow: parentWindow,
+		barColor: '#0ba711',
 	});
 	
 	
@@ -10,4 +11,4 @@ function MyNumbersWindow(parentWindow) {
 };
 
 //as we're getting this window as a part of a require, we'll need to expose the scope
-module.exports = MyNumbersWindow;
+module.exports = SettingsWindow;

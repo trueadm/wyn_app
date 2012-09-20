@@ -1,0 +1,13 @@
+Logfile initialized
+[INFO] logfile = /Volumes/StorageVol/Titanium/Workspaces/WYN/build.log
+[DEBUG] /Users/ADM/Library/Application Support/Titanium/mobilesdk/osx/2.1.2.GA/android/builder.py simulator WYN /Volumes/StorageVol/Titanium/Android SDK /Volumes/StorageVol/Titanium/Workspaces/WYN com.internal.wyn 6 HVGA 
+[INFO] Building WYN for Android ... one moment
+[INFO] Titanium SDK version: 2.1.2 (08/24/12 14:46 ed7f777)
+[DEBUG] Waiting for device to be ready ...
+[TRACE] adb devices returned 0 devices/emulators
+[TRACE] adb devices returned 0 devices/emulators
+[TRACE] adb devices returned 0 devices/emulators
+[TRACE] adb devices returned 0 devices/emulators
+[TRACE] adb devices returned 0 devices/emulators
+[TRACE] adb devices returned 0 devices/emulators
+[ERROR] Timed out waiting for emulator to be ready, you may need to close the emulator and try again

@@ -1,8 +1,9 @@
-function SettingsWindow(parentWindow) {
+function ListWindow(parentWindow) {
 	var self = Ti.UI.createWindow({
-		title:'Settings',
+		title:'List',
 		backgroundColor:'white',
-		parentWindow: parentWindow
+		parentWindow: parentWindow,
+		barColor: '#0ba711',
 	});
 	
 	
@@ -10,4 +11,4 @@ function SettingsWindow(parentWindow) {
 };
 
 //as we're getting this window as a part of a require, we'll need to expose the scope
-module.exports = SettingsWindow;
+module.exports = ListWindow;
