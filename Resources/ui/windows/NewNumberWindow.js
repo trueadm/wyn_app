@@ -33,7 +33,7 @@ function NewNumberWindow(parentWindow) {
 		numPadButton = new NumPadButton(i + 1, left, top, self);
 		self.add(numPadButton);
 		//top += 50;
-		if((i + 1) % 3 == 0) {
+		if((i + 1) % 3 === 0) {
 			top += 56;
 			left = 16;
 		} else {
