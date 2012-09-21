@@ -23,9 +23,7 @@ if (Ti.version < 1.8 ) {
 		'user_status', 'email'
 	];
 	
-	var LocalStorage = require('data/LocalStorage');
-	
 	var MainTabGroup = require('ui/MainTabGroup');
-	new MainTabGroup(new LocalStorage()).open();
+	new MainTabGroup().open();
 
 })();

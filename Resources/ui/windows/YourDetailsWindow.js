@@ -213,18 +213,6 @@ function YourDetailsWindow(parentWindow, localStorage) {
 				}
 			});
 			
-			// Save to list in app properties
-			var numbers = Ti.App.Properties.getList('numbers');
-			if (!numbers) {
-				numbers = [];
-			}
-			numbers.push({
-				id: person.recordId,
-				created: new Date().getTime()
-			});
-			
-			Ti.App.Properties.setList('numbers', numbers);
-			
 			// Show thank you window
 			var ThankYouWindow = require('ui/windows/ThankYouWindow');
 			self.containingTab.open(new ThankYouWindow(self, self.localStorage));			
