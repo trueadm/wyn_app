@@ -131,14 +131,16 @@ function YourDetailsWindow(parentWindow, localStorage) {
 		firstNameField.focus();	
 	});
 	
-	function setPhoto(image) {
+	function setPhoto(photo) {
+		self.photo = photo;
 		cameraButton.hide();
 		photoPreview.show();
 		clearPhotoButton.show();
-		photoPreview.setImage(image);		
+		photoPreview.setImage(photo);		
 	}
 	
 	function clearPhoto() {
+		self.photo = null;
 		cameraButton.show();
 		photoPreview.hide();
 		clearPhotoButton.hide();
@@ -153,7 +155,7 @@ function YourDetailsWindow(parentWindow, localStorage) {
 			error: function(error) {
 				var a = Titanium.UI.createAlertDialog({title:'Camera'});
 				if (error.code == Titanium.Media.NO_CAMERA) {
-					setPhoto('http://www.reputation-book.com/files/content/louis.jpg');
+					setPhoto(Titanium.Filesystem.getFile('images/test_photo.jpg').read());
 				} else {
 					a.setMessage('Unexpected error: ' + error.code);
 				}
@@ -164,12 +166,32 @@ function YourDetailsWindow(parentWindow, localStorage) {
 	clearPhotoButton.addEventListener('click', clearPhoto);
 	
 	saveButton.addEventListener('click', function(){
+		// Validate form
 		var valid = true;
 		if (!firstNameField.value) {
 			parentWindow.betterAlert('No name entered', 'Oops, you need to enter at least a first name!', 'I have AIDS', 'I like men');
 			valid = false;
 		}
+		
 		if (valid) {
+			// Create contact
+			var person = {
+				phone:		{mobile: [parentWindow.phoneNumber]},
+				firstName: 	firstNameField.value,
+			}
+			if (lastNameField.value) {
+				person.lastName = lastNameField.value;
+			}
+			if (emailField.value) {
+				person.email = {home: [emailField.value]};
+			}
+			if (self.photo) {
+				person.image = self.photo;
+			}
+			Ti.Contacts.createPerson(person);
+			Ti.Contacts.save();
+			
+			// Show thank you window
 			var ThankYouWindow = require('ui/windows/ThankYouWindow');
 			self.containingTab.open(new ThankYouWindow(self, self.localStorage));			
 		}

@@ -98,6 +98,8 @@ function NewNumberWindow(parentWindow, localStorage) {
 	saveButton.addEventListener('click', function() {
 		var statusAlert;
 		
+		self.phoneNumber = numberLabel.text;
+		
 		switch(numberLabel.text) {
 			case '': {
 				self.betterAlert('No number entered', 'Opps, you didn\'t enter a number!', 'My bad', 'I\'m a twat');
