@@ -1,4 +1,4 @@
-function NewNumberWindow(parentWindow) {
+function NewNumberWindow(parentWindow, localStorage) {
 	
 	var self = Ti.UI.createWindow({
 		title:'Enter your number',
@@ -109,7 +109,7 @@ function NewNumberWindow(parentWindow) {
 				//make new your details window
 				var YourDetailsWindow = require('ui/windows/YourDetailsWindow');
 				//open the window
-				self.containingTab.open(new YourDetailsWindow(self));
+				self.containingTab.open(new YourDetailsWindow(self, self.localStorage));
 				break;
 			}
 		}

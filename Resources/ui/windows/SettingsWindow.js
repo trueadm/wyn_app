@@ -1,4 +1,4 @@
-function SettingsWindow(parentWindow) {
+function SettingsWindow(parentWindow, localStorage) {
 	var self = Ti.UI.createWindow({
 		title:'Settings',
 		backgroundColor:'white',
@@ -9,12 +9,14 @@ function SettingsWindow(parentWindow) {
 	//make the table
 	var settingsTableData =	[
 		{title:'Edit my details', header:'My Profile', hasChild: true, selectedBackgroundColor: '#0ba711'},,
-		{title:'Show activity on Facebook', header:'Social Media', hasChild: true, selectedBackgroundColor: '#0ba711'},
-		{title:'Send reminders after', header:'Reminders', selectedBackgroundColor: '#0ba711'},
+		{title:'Connect to Facebook', header:'Social Media', hasChild: true, selectedBackgroundColor: '#0ba711'},
+		{title:'Connect to Twitter', hasChild: true, selectedBackgroundColor: '#0ba711'},
+		//{title:'Send reminders after', header:'Reminders', selectedBackgroundColor: '#0ba711'},
 		//{title:'Send criteria', hasChild: true, selectedBackgroundColor: '#0ba711'},
-		{title:'Personalise message', hasChild: true, selectedBackgroundColor: '#0ba711'},
-		{title:'Fake low battery warning', header:'Helpful Tricks', selectedBackgroundColor: '#0ba711'},
-		{title:'Fake SMS message', hasChild: true, selectedBackgroundColor: '#0ba711'},
+		{title:'My Number templates', header:'Personalise', hasChild: true, selectedBackgroundColor: '#0ba711'},
+		{title:'Keypad theme',  selectedBackgroundColor: '#0ba711'},
+		//{title:'Fake SMS message',header: 'Helpful Tricks', hasChild: true, selectedBackgroundColor: '#0ba711'},
+		//{title:'Fake low battery warning', selectedBackgroundColor: '#0ba711'},
 	];
 	
 	var settingsTable = Ti.UI.createTableView({
