@@ -1,4 +1,4 @@
-function MainTabGroup(localStorage) {
+function MainTabGroup() {
 	//create module instance
 	var self = Ti.UI.createTabGroup();
 	
@@ -22,18 +22,16 @@ function MainTabGroup(localStorage) {
 	
 		//init the windows for each tab
 		var NewNumberWindow = require('ui/windows/NewNumberWindow');
-		self.newNumberWindow = new NewNumberWindow(self, localStorage);
+		self.newNumberWindow = new NewNumberWindow(self);
 		
 		var ListWindow = require('ui/windows/ListWindow');
-		self.listWindow = new ListWindow(self, localStorage);
+		self.listWindow = new ListWindow(self);
 		
 		var MyNumberWindow = require('ui/windows/MyNumberWindow');
-		self.myNumberWindow = new MyNumberWindow(self, localStorage);	
+		self.myNumberWindow = new MyNumberWindow(self);	
 		
 		var SettingsWindow = require('ui/windows/SettingsWindow');
-		self.settingsWindow = new SettingsWindow(self, localStorage);	
-	
-	
+		self.settingsWindow = new SettingsWindow(self);	
 				
 		//create app tabs
 		var tab1 = Ti.UI.createTab({
@@ -68,7 +66,6 @@ function MainTabGroup(localStorage) {
 		self.addTab(tab2);
 		self.addTab(tab3);
 		self.addTab(tab4);
-		
 	}
 	
 				

@@ -1,4 +1,4 @@
-function ThankYouWindow(parentWindow, localStorage) {
+function ThankYouWindow(parentWindow) {
 	var self = Ti.UI.createWindow({
 		title:'Thank You!',
 		backgroundColor:'#eee',

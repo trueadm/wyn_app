@@ -1,4 +1,4 @@
-function SettingsWindow(parentWindow, localStorage) {
+function SettingsWindow(parentWindow) {
 	var self = Ti.UI.createWindow({
 		title:'Settings',
 		backgroundColor:'white',

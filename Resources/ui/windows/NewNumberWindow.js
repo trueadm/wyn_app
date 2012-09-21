@@ -1,4 +1,4 @@
-function NewNumberWindow(parentWindow, localStorage) {
+function NewNumberWindow(parentWindow) {
 	
 	var self = Ti.UI.createWindow({
 		title:'Enter your number',

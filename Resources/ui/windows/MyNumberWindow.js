@@ -1,4 +1,4 @@
-function MyNumberWindow(parentWindow, localStorage) {
+function MyNumberWindow(parentWindow) {
 	
 
 	var self = Ti.UI.createWindow({

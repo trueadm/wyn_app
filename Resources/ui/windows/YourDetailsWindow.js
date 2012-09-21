@@ -1,4 +1,4 @@
-function YourDetailsWindow(parentWindow, localStorage) {
+function YourDetailsWindow(parentWindow) {
 	var self = Ti.UI.createWindow({
 		title:'Your Details',
 		backgroundColor:'#eee',
