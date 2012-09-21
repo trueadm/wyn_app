@@ -6,7 +6,7 @@ function MainTabGroup(localStorage) {
 	//if not show them a different tabgroup, but with only the edit details window
 	//we need to use a tabgroup to have the nice titlebar at the top
 	
-	if(localStorage.myFirstName == undefined && localStorage.myNumber == undefined) {	
+	if(0 && localStorage.myFirstName == undefined && localStorage.myNumber == undefined) {	
 		//init the windows for each tab
 		var EditDetailsWindow = require('ui/windows/EditDetailsWindow');
 		

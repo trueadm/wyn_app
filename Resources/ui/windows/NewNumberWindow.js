@@ -64,7 +64,6 @@ function NewNumberWindow(parentWindow, localStorage) {
 	var saveButton = Ti.UI.createButton({
 		height:55,
 		width:288,
-		//title:L('Save'),
 		bottom: 12,
 		backgroundImage: 'images/add_button.png',
 	});
@@ -72,7 +71,7 @@ function NewNumberWindow(parentWindow, localStorage) {
 	
 	//we use a label as we have better control over how it looks via the title of a button
 	var buttonTextLabel = Ti.UI.createLabel({
-		text: 'Save',
+		text: 'Done',
 		font:{fontSize:22, fontWeight: 'bold', fontFamily:'Helvetica Neue'},
 		textAlign:'center',
 		shadowOffset:{x:0,y:2},
@@ -109,7 +108,9 @@ function NewNumberWindow(parentWindow, localStorage) {
 				//make new your details window
 				var YourDetailsWindow = require('ui/windows/YourDetailsWindow');
 				//open the window
-				self.containingTab.open(new YourDetailsWindow(self, self.localStorage));
+				self.YourDetailsWindow = new YourDetailsWindow(self, self.localStorage);
+				self.YourDetailsWindow.containingTab = self.containingTab;
+				self.containingTab.open(self.YourDetailsWindow);
 				break;
 			}
 		}

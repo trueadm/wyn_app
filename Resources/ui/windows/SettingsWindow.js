@@ -6,11 +6,35 @@ function SettingsWindow(parentWindow, localStorage) {
 		barColor: '#0ba711',
 	});
 	
+	var fbLogin = Ti.UI.createTableViewRow({
+		header:'Social Media', selectedBackgroundColor: '#0ba711'
+	});
+	
+	function setFbLoginState() {
+		if (Ti.Facebook.loggedIn) {
+			fbLogin.title = 'Disconnect from Facebook';
+		} else {
+			fbLogin.title = 'Connect to Facebook';
+		}
+	}
+	
+	Ti.Facebook.addEventListener('login', setFbLoginState);
+	Ti.Facebook.addEventListener('logout', setFbLoginState);
+	setFbLoginState();
+	
+	fbLogin.addEventListener('click', function(){
+		if (Ti.Facebook.loggedIn) {
+			Ti.Facebook.logout();
+		} else {
+			Ti.Facebook.authorize();
+		}
+	});
+	
 	//make the table
 	var settingsTableData =	[
 		{title:'Edit my details', header:'My Profile', hasChild: true, selectedBackgroundColor: '#0ba711'},,
-		{title:'Connect to Facebook', header:'Social Media', hasChild: true, selectedBackgroundColor: '#0ba711'},
-		{title:'Connect to Twitter', hasChild: true, selectedBackgroundColor: '#0ba711'},
+		fbLogin,
+		{title:'Connect to Twitter', selectedBackgroundColor: '#0ba711'},
 		//{title:'Send reminders after', header:'Reminders', selectedBackgroundColor: '#0ba711'},
 		//{title:'Send criteria', hasChild: true, selectedBackgroundColor: '#0ba711'},
 		{title:'My Number templates', header:'Personalise', hasChild: true, selectedBackgroundColor: '#0ba711'},
@@ -25,6 +49,10 @@ function SettingsWindow(parentWindow, localStorage) {
 	});
 	
 	self.add(settingsTable);
+	
+	//self.add(fb);
+	
+	
 	
 	return self;
 };

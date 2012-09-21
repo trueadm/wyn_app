@@ -18,6 +18,11 @@ if (Ti.version < 1.8 ) {
 // This is a single context application with mutliple windows in a stack
 (function() {
 	
+	Ti.Facebook.appid = '3748181557';
+	Ti.Facebook.permissions = [
+		'user_status', 'email'
+	];
+	
 	var LocalStorage = require('data/LocalStorage');
 	
 	var MainTabGroup = require('ui/MainTabGroup');
