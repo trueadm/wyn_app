@@ -1,4 +1,4 @@
-function YourDetailsWindow(parentWindow, localStorage) {
+function ThankYouWindow(parentWindow, localStorage) {
 	var self = Ti.UI.createWindow({
 		title:'Thank You!',
 		backgroundColor:'#eee',
@@ -12,4 +12,4 @@ function YourDetailsWindow(parentWindow, localStorage) {
 };
 
 //as we're getting this window as a part of a require, we'll need to expose the scope
-module.exports = YourDetailsWindow;
+module.exports = ThankYouWindow;
