@@ -8,6 +8,17 @@ function ThankYouWindow(parentWindow) {
 		barColor: '#0ba711',
 	});
 	
+	var button = Ti.UI.createButton({
+		title: 'Add another number'
+	});
+	self.add(button);
+	
+	button.addEventListener('click', function() {
+		self.close();
+		self.parentWindow.close();
+		self.parentWindow.parentWindow.clear();
+	});
+	
 	return self;
 };
 

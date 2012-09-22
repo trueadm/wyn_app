@@ -123,6 +123,10 @@ function NewNumberWindow(parentWindow) {
 		self.parentWindow.betterAlert(header, text, button1Text, button2Text);
 	};	
 	
+	self.clear = function() {
+		numberLabel.text = '';
+	}
+	
 	return self;
 };
 

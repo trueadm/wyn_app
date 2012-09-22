@@ -203,7 +203,7 @@ function YourDetailsWindow(parentWindow) {
 			}
 			
 			// Try to get geo position
-			Ti.Geolocation.accuracy = Ti.Geolocation.ACCURACY_HIGH;
+			Titanium.Geolocation.accuracy = Ti.Geolocation.ACCURACY_HIGH;
 			Ti.Geolocation.purpose = 'Tag this number with your current location';
 			Ti.Geolocation.getCurrentPosition(function(event) {
 				if (event.success) {
@@ -215,7 +215,7 @@ function YourDetailsWindow(parentWindow) {
 			
 			// Show thank you window
 			var ThankYouWindow = require('ui/windows/ThankYouWindow');
-			self.containingTab.open(new ThankYouWindow(self, self.localStorage));			
+			self.containingTab.open(new ThankYouWindow(self, self.localStorage));
 		}
 	});
 	
