@@ -1,34 +1,33 @@
 function MainTabGroup() {
-	//create module instance
-	var self = Ti.UI.createTabGroup();
+	var self = Ti.UI.createTabGroup(),
+		Settings = require('data/Settings'),
+		welcomeTab;
 	
 	//if the user has entered their name and number, show them the tabgroup with normal window 
 	//if not show them a different tabgroup, but with only the edit details window
 	//we need to use a tabgroup to have the nice titlebar at the top
 	
-	if(0 && localStorage.myFirstName == undefined && localStorage.myNumber == undefined) {	
-		//init the windows for each tab
-		var EditDetailsWindow = require('ui/windows/EditDetailsWindow');
-		
-		var tab1 = Ti.UI.createTab({
+	self.showWelcomeWindow = function() {
+		var WelcomeWindow = require('ui/windows/WelcomeWindow');
+		welcomeTab = Ti.UI.createTab({
 			title: '',
 			icon: '/images/tab_addnumber_icon.png',
-			window: new EditDetailsWindow(undefined, 'Add Your Details'),	
-		});	
+			window: new WelcomeWindow(self),	
+		});
+		self.addTab(welcomeTab);
+	}
+	
+	self.showMainTabs = function() {
 		
-		self.addTab(tab1);	
-	
-	} else {
-	
 		//init the windows for each tab
 		var NewNumberWindow = require('ui/windows/NewNumberWindow');
 		self.newNumberWindow = new NewNumberWindow(self);
 		
 		var ListWindow = require('ui/windows/ListWindow');
-		self.listWindow = new ListWindow(self);
+		self.listWindow = new ListWindow();
 		
 		var MyNumberWindow = require('ui/windows/MyNumberWindow');
-		self.myNumberWindow = new MyNumberWindow(self);	
+		self.myNumberWindow = new MyNumberWindow();	
 		
 		var SettingsWindow = require('ui/windows/SettingsWindow');
 		self.settingsWindow = new SettingsWindow(self);	
@@ -66,24 +65,22 @@ function MainTabGroup() {
 		self.addTab(tab2);
 		self.addTab(tab3);
 		self.addTab(tab4);
+		
+		self.activeTab = tab1;
+		
+		if (welcomeTab != null) {
+			self.removeTab(welcomeTab);
+		}
 	}
 	
-				
-	self.betterAlert = function(header, text, button1Text, button2Text) {
-		var statusAlert = Titanium.UI.createAlertDialog({
-			title: header,
-			message: text,
-		});
-		
-		if(button1Text !== '' && button2Text !== '') {
-			statusAlert.buttonNames = [button1Text, button2Text];
-		}
-
-		statusAlert.show();	
-	};	
+	// Show welcome window on first load
+	if (Settings.get('name') == null && Settings.get('number') == null) {	
+		self.showWelcomeWindow();	
+	} else {
+		self.showMainTabs();
+	}	
 	
 	return self;
 };
 
-//as we're getting this tabgroup as a part of a require, we'll need to expose the scope
 module.exports = MainTabGroup;

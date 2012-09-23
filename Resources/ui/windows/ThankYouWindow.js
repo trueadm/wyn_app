@@ -22,5 +22,4 @@ function ThankYouWindow(parentWindow) {
 	return self;
 };
 
-//as we're getting this window as a part of a require, we'll need to expose the scope
 module.exports = ThankYouWindow;

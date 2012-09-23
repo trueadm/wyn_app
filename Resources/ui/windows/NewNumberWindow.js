@@ -1,5 +1,4 @@
 function NewNumberWindow(parentWindow) {
-	
 	var self = Ti.UI.createWindow({
 		title:'Enter your number',
 		backgroundColor:'#eee',
@@ -89,6 +88,7 @@ function NewNumberWindow(parentWindow) {
 		backgroundSelectedImage: 'images/bigback_button_sel.png',
 	});
 	backspaceButton.addEventListener('touchend', removeDigit);
+	backspaceButton.addEventListener('longpress', self.clear);
 	self.add(backspaceButton);		
 	
 	//Add Save button, but it at bottom of screen
@@ -122,7 +122,7 @@ function NewNumberWindow(parentWindow) {
 		// Validate
 		if (!self.phoneNumber) {
 			error = 'You didn\'t enter a number';
-		} else if (self.phoneNumber.length < 11) {
+		} else if (self.phoneNumber.length < 10) {
 			error = 'That number looks too short';
 		}
 		
@@ -145,5 +145,4 @@ function NewNumberWindow(parentWindow) {
 	return self;
 };
 
-//as we're getting this window as a part of a require, we'll need to expose the scope
 module.exports = NewNumberWindow;

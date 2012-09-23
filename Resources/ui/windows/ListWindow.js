@@ -1,8 +1,7 @@
-function ListWindow(parentWindow) {
+function ListWindow() {
 	var self = Ti.UI.createWindow({
 		title:'List',
 		backgroundColor:'white',
-		parentWindow: parentWindow,
 		barColor: '#0ba711',
 	});
 	
@@ -13,7 +12,7 @@ function ListWindow(parentWindow) {
 	
 	table.addEventListener('click', function(event) {
 		var ContactDetailWindow = require('ui/windows/ContactDetailWindow');
-		self.containingTab.open(new ContactDetailWindow(parentWindow, event.rowData.contact));
+		self.containingTab.open(new ContactDetailWindow(event.rowData.contact));
 	});
 	
 	self.populateTable = function() {

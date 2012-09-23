@@ -1,9 +1,8 @@
-function ContactDetailWindow(parentWindow, contact) {
+function ContactDetailWindow(contact) {
 	
 	var self = Ti.UI.createWindow({
 		title: contact.getName(),
 		backgroundColor:'#eee',
-		parentWindow: parentWindow,
 		barColor: '#0ba711',
 	});
 	

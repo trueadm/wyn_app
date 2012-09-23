@@ -218,8 +218,10 @@ function YourDetailsWindow(parentWindow) {
 			});
 			
 			// Show thank you window
-			var ThankYouWindow = require('ui/windows/ThankYouWindow');
-			self.containingTab.open(new ThankYouWindow(self, self.localStorage));
+			var ThankYouWindow = require('ui/windows/ThankYouWindow'),
+				thankYouWindow = new ThankYouWindow(self);
+			
+			self.containingTab.open();
 		}
 	});
 	
