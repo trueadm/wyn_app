@@ -42,7 +42,7 @@ function MainTabGroup() {
 		self.newNumberWindow.containingTab = tab1;
 		
 		var tab2 = Ti.UI.createTab({
-			title: L('List'),
+			title: L('Recent'),
 			icon: '/images/tab_list_icon.png',
 			window: self.listWindow
 		});

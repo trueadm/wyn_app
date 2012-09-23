@@ -6,11 +6,79 @@ function SettingsWindow(parentWindow) {
 		barColor: '#0ba711',
 	});
 	
-	var fbLogin = Ti.UI.createTableViewRow({
-		header:'Social Media', selectedBackgroundColor: '#0ba711'
+	var Settings = require('data/settings');
+	
+	var settingsTable = Ti.UI.createTableView({
+		style:Titanium.UI.iPhone.TableViewStyle.GROUPED
+	});
+	self.add(settingsTable);
+	
+	// Your name:
+	
+	var yourName = Ti.UI.createTableViewRow({
+		header:'Your details',
+		title: 'Your name',
+	});
+	settingsTable.appendRow(yourName);
+	
+	// Add text field to row
+	var yourNameField = Ti.UI.createTextField({
+		left: 140,
+		width: 140,
+		height: 45,
+		color: '#0ba711',
+		borderStyle: Ti.UI.INPUT_BORDERSTYLE_NONE,
+		value: Settings.get('name')
+	});
+	yourName.add(yourNameField);
+	
+	// Make entire row focus text field
+	yourName.addEventListener('click', function() {
+		yourNameField.focus();
+	});
+	// Update settings on blur
+	yourNameField.addEventListener('blur', function() {
+		Settings.set('name', yourNameField.value);
 	});
 	
-	function setFbLoginState() {
+	// Your nubmer:
+	
+	var yourNumber = Ti.UI.createTableViewRow({
+		title: 'Your number'
+	});
+	settingsTable.appendRow(yourNumber);
+	
+	// Add text field to row
+	var yourNumberField = Ti.UI.createTextField({
+		left: 140,
+		width: 140,
+		height: 45,
+		color: '#0ba711',
+		borderStyle: Ti.UI.INPUT_BORDERSTYLE_NONE,
+		value: Settings.get('number'),
+		keyboardType: Ti.UI.KEYBOARD_PHONE_PAD
+	});
+	yourNumber.add(yourNumberField);
+	
+	// Make entire row focus text field
+	yourNumber.addEventListener('click', function() {
+		yourNumberField.focus();
+	});
+	// Update settings on blur
+	yourNumberField.addEventListener('blur', function() {
+		Settings.set('number', yourNumberField.value);
+	});
+	
+	// Facebook login / logout:
+	
+	var fbLogin = Ti.UI.createTableViewRow({
+		header:'Social Media',
+		selectedBackgroundColor: '#0ba711'
+	});
+	settingsTable.appendRow(fbLogin);
+	
+	// Callback to update text based on logged in state
+	var setFbLoginState = function() {
 		if (Ti.Facebook.loggedIn) {
 			fbLogin.title = 'Disconnect from Facebook';
 		} else {
@@ -18,6 +86,7 @@ function SettingsWindow(parentWindow) {
 		}
 	}
 	
+	// Add callbacks to events and call now
 	Ti.Facebook.addEventListener('login', setFbLoginState);
 	Ti.Facebook.addEventListener('logout', setFbLoginState);
 	setFbLoginState();
@@ -29,31 +98,7 @@ function SettingsWindow(parentWindow) {
 			Ti.Facebook.authorize();
 		}
 	});
-	
-	//make the table
-	var settingsTableData =	[
-		{title:'Edit my details', header:'My Profile', hasChild: true, selectedBackgroundColor: '#0ba711'},,
-		fbLogin,
-		{title:'Connect to Twitter', selectedBackgroundColor: '#0ba711'},
-		//{title:'Send reminders after', header:'Reminders', selectedBackgroundColor: '#0ba711'},
-		//{title:'Send criteria', hasChild: true, selectedBackgroundColor: '#0ba711'},
-		{title:'My Number templates', header:'Personalise', hasChild: true, selectedBackgroundColor: '#0ba711'},
-		{title:'Keypad theme',  selectedBackgroundColor: '#0ba711'},
-		//{title:'Fake SMS message',header: 'Helpful Tricks', hasChild: true, selectedBackgroundColor: '#0ba711'},
-		//{title:'Fake low battery warning', selectedBackgroundColor: '#0ba711'},
-	];
-	
-	var settingsTable = Ti.UI.createTableView({
-		data: settingsTableData,
-		style:Titanium.UI.iPhone.TableViewStyle.GROUPED
-	});
-	
-	self.add(settingsTable);
-	
-	//self.add(fb);
-	
-	
-	
+		
 	return self;
 };
 

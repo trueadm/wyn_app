@@ -1,12 +1,12 @@
 function Contact(appContact) {
 	
 	var self = {
-		id: appContact.id,
-		lat: appContact.lat,
-		lon: appContact.lon,
-		created: new Date(appContact.created),		
+		id: 		appContact.id,
+		coords: 	appContact.coords,
+		created: 	new Date(appContact.created),		
 	};
    	
+   	// Get data from assocatiated phone contact entry
    	var phoneContact = Ti.Contacts.getPersonByID(self.id);
    	
 	if (phoneContact) {
@@ -14,6 +14,9 @@ function Contact(appContact) {
 		self.lastName = phoneContact.lastName;	
 	}
 	
+	/**
+	 * Get full formatted name
+	 */
 	self.getName = function() {
 		var name = self.firstName;
 		if (self.lastName) {
@@ -22,6 +25,9 @@ function Contact(appContact) {
 		return name;
 	}
 	
+	/**
+	 * Get string to use as table heading
+	 */
 	self.getDateHeading = function() {
 		// Todo
 		var now = new Date(),

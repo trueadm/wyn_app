@@ -62,7 +62,6 @@ function MyNumberWindow(parentWindow) {
 	scrollView.add(line);	
 	
 	var numberLabel = Ti.UI.createLabel({
-		text: '07123 456789',
 		font:{fontSize:38, fontWeight: 'bold', fontFamily:'Helvetica Neue'},
 		textAlign:'center',
 		shadowOffset:{x:1,y:1},
@@ -135,6 +134,16 @@ function MyNumberWindow(parentWindow) {
 		touchEnabled: false,
 	});
 	whatsYourNumberButton.add(buttonTextLabel);
+	
+	var Settings = require('data/Settings');
+	
+	var setText = function() {
+		utils = require('PhoneNumberUtils');
+		myNameLabel.text = 'My name is '  + Settings.get('name') + ' and my number is';
+		numberLabel.text = utils.formatNumber(Settings.get('number'));
+	}
+	
+	self.addEventListener('focus', setText);
 	
 	return self;
 };

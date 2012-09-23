@@ -167,17 +167,23 @@ function YourDetailsWindow(parentWindow) {
 	
 	saveButton.addEventListener('click', function(){
 		// Validate form
-		var valid = true;
-		if (!firstNameField.value) {
-			parentWindow.betterAlert('No name entered', 'Oops, you need to enter at least a first name!', 'I have AIDS', 'I like men');
-			valid = false;
-		}
+		var error;
 		
-		if (valid) {
-			// Create contact
+		if (!firstNameField.value) {
+			error = 'You need to enter at least a first name';
+		}
+		if (error) {
+			var statusAlert = Titanium.UI.createAlertDialog({
+				title: 'Oops!',
+				message: error
+			});
+			statusAlert.show();
+			
+		} else {
+			// Create phone contact
 			var person = {
-				phone:		{mobile: [parentWindow.phoneNumber]},
-				firstName: 	firstNameField.value,
+				phone: {mobile: [parentWindow.phoneNumber]},
+				firstName: firstNameField.value,
 			}
 			if (lastNameField.value) {
 				person.lastName = lastNameField.value;
@@ -188,29 +194,27 @@ function YourDetailsWindow(parentWindow) {
 			if (self.photo) {
 				person.image = self.photo;
 			}
-			person = Ti.Contacts.createPerson(person);
+			var phoneContact = Ti.Contacts.createPerson(person);
 			
-			var addLocalContact = function(person, lat, lon) {
-				// Save to list in app properties
-				var numbers = Ti.App.Properties.getList('numbers', []);
-				numbers.push({
-					id: person.recordId,
-					lat: lat,
-					lon: lon,
-					created: new Date().getTime()
-				});
-				Ti.App.Properties.setList('numbers', numbers);
-			}
+			// Try to get geo location
 			
-			// Try to get geo position
+			// Null by default
+			var coords = null;
+			
 			Titanium.Geolocation.accuracy = Ti.Geolocation.ACCURACY_HIGH;
-			Ti.Geolocation.purpose = 'Tag this number with your current location';
+			Ti.Geolocation.purpose = 'Tag number with your current location';
+			
 			Ti.Geolocation.getCurrentPosition(function(event) {
 				if (event.success) {
-					addLocalContact(person, event.coords.latitude, event.coords.longitude);
-				} else {
-					addLocalContact(person);	
+					coords = event.coords
 				}
+				// Store contact
+				var AppContacts = require('data/AppContacts');
+				AppContacts.add({
+					id: phoneContact.recordId,
+					coords: event.coords,
+					created: new Date().getTime()
+				});
 			});
 			
 			// Show thank you window
