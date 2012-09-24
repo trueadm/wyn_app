@@ -72,7 +72,7 @@ function NewNumberWindow(parentWindow) {
 		//top += 50;
 		if ((i + 1) % 3 === 0) {
 			top += 63;
-			left = 15;
+			left = 16;
 		} else {
 			left += 100;
 		}
@@ -82,7 +82,7 @@ function NewNumberWindow(parentWindow) {
 	// self.add(numPadButton);
 		
 	//now put the 0 in
-	numPadButton = new NumPadButton(0, 16 + 97, top, self);
+	numPadButton = new NumPadButton(0, 116, top, self);
 	numPadButton.addEventListener('touchend', function(e) {
 		appendDigit(0);
 	});
@@ -90,10 +90,10 @@ function NewNumberWindow(parentWindow) {
 	
 	//Add Backspace button, next to the 0
 	var backspaceButton = Ti.UI.createButton({
-		width: 95,
-		height: 55,
+		width: 91,
+		height: 66,
 		top: top,
-		left: 16 + 97 + 96,
+		left: 16,
 		backgroundImage: 'images/bigback_button.png',
 		backgroundSelectedImage: 'images/bigback_button_sel.png',
 	});
@@ -103,27 +103,14 @@ function NewNumberWindow(parentWindow) {
 	
 	//Add Save button, but it at bottom of screen
 	var saveButton = Ti.UI.createButton({
-		height:55,
-		width:288,
-		bottom: 12,
-		backgroundImage: 'images/add_button.png',
+		width: 91,
+		height: 66,
+		top: top,
+		left: 216,
+		backgroundImage: 'images/phone_key_submit.png',
+		backgroundSelectedImage: 'images/phone_key_submit_down.png',
 	});
 	self.add(saveButton);
-	
-	//we use a label as we have better control over how it looks via the title of a button
-	var buttonTextLabel = Ti.UI.createLabel({
-		text: 'Done',
-		font: {fontSize:22, fontWeight: 'bold', fontFamily:'Helvetica Neue'},
-		textAlign: 'center',
-		shadowOffset :{x:0,y:2},
-		shadowColor: '#16950d',
-		color: '#fff',
-		width: saveButton.width,
-		zIndex: 2,
-		height: saveButton.height - 5,
-		touchEnabled: false,
-	});
-	saveButton.add(buttonTextLabel);
 	
 	//Listener for Save Button
 	saveButton.addEventListener('click', function() {
