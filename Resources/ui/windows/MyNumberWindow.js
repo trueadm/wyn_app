@@ -2,8 +2,10 @@ function MyNumberWindow() {
 	
 	var self = Ti.UI.createWindow({
 		title:'My Number',
-		backgroundColor:'#eee',
-		barColor: '#0ba711',
+		barColor: 'black',
+		barImage: 'images/navbar_leather.png',
+		backgroundColor:'white',
+		backgroundImage: 'images/bg_white.png',
 	});
 	
 	//add buttons to title bar so we can switch templates of this page

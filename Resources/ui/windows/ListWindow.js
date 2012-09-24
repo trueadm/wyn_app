@@ -1,8 +1,10 @@
 function ListWindow() {
 	var self = Ti.UI.createWindow({
-		title:'List',
+		title:'Recently added',
+		barColor: 'black',
+		barImage: 'images/navbar_leather.png',
 		backgroundColor:'white',
-		barColor: '#0ba711',
+		backgroundImage: 'images/bg_white.png',
 	});
 	
 	var table = Ti.UI.createTableView({

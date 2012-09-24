@@ -1,12 +1,14 @@
 function WelcomeWindow(tabGroup) {
 	var self = Ti.UI.createWindow({
 		title: 'Welcome',
-		backgroundColor:'#eee',
-		barColor: '#0ba711',
+		barColor: 'black',
+		barImage: 'images/navbar_leather.png',
+		backgroundColor:'white',
+		backgroundImage: 'images/bg_white.png',
 		tabBarHidden: true
 	});
 	
-	var Settings = require('data/settings');
+	var Settings = require('data/Settings');
 	
 	var yourNameField = Ti.UI.createTextField({
 		top: 20,

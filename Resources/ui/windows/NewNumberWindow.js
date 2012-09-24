@@ -1,22 +1,32 @@
 function NewNumberWindow(parentWindow) {
 	var self = Ti.UI.createWindow({
-		title:'Enter your number',
-		backgroundColor:'#eee',
+		title:'What’s your number?',
+		barColor: 'black',
+		barImage: 'images/navbar_leather.png',
+		backgroundImage: 'images/numpad_bg.png',
 		parentWindow: parentWindow,
-		barColor: '#0ba711',
 	});
+	
+	/*
+	var ad = Ti.UI.iOS.createAdView({
+		adSize: Ti.UI.iOS.AD_SIZE_PORTRAIT,
+		top: 0,
+		left: 0,
+		width: 'auto',
+		height: 'auto'
+	});
+	self.add(ad);
+	*/
 	
 	//add a label that will display the number
 	var numberLabel = Ti.UI.createLabel({
 		text: '',
-		font:{fontSize:32, fontWeight: 'bold', fontFamily:'Helvetica Neue'},
+		font:{fontSize:46, fontWeight: 'bold', fontFamily:'Rabiohead'},
 		textAlign:'center',
-		shadowOffset:{x:1,y:1},
-		shadowColor:'#fff',
-		width: 280,
-		color: '#222',
-		left: 20,
-		top: 8,
+		width: 300,
+		color: '#01215b',
+		left: 10,
+		top: 15,
 	});
 	self.add(numberLabel);
 	
@@ -49,7 +59,7 @@ function NewNumberWindow(parentWindow) {
 	//Make the numpad
 	var NumPadButton = require('ui/buttons/NumPadButton'),
 		numPadButton,
-		top = 65,
+		top = 95,
 		left = 16;
 	
 	//go through 1-9 and make them in a grid, forget about 0 as that's special	
@@ -61,10 +71,10 @@ function NewNumberWindow(parentWindow) {
 		self.add(numPadButton);
 		//top += 50;
 		if ((i + 1) % 3 === 0) {
-			top += 56;
-			left = 16;
+			top += 63;
+			left = 15;
 		} else {
-			left += 97;
+			left += 100;
 		}
 	}
 	//now put the + in
@@ -137,7 +147,6 @@ function NewNumberWindow(parentWindow) {
 			var YourDetailsWindow = require('ui/windows/YourDetailsWindow');
 			//open the window
 			self.YourDetailsWindow = new YourDetailsWindow(self);
-			self.YourDetailsWindow.containingTab = self.containingTab;
 			self.containingTab.open(self.YourDetailsWindow);			
 		}
 	});

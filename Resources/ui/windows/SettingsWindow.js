@@ -1,9 +1,11 @@
 function SettingsWindow(parentWindow) {
 	var self = Ti.UI.createWindow({
 		title:'Settings',
+		barColor: 'black',
+		barImage: 'images/navbar_leather.png',
 		backgroundColor:'white',
+		backgroundImage: 'images/bg_white.png',
 		parentWindow: parentWindow,
-		barColor: '#0ba711',
 	});
 	
 	var Settings = require('data/settings');

@@ -2,8 +2,10 @@ function ContactDetailWindow(contact) {
 	
 	var self = Ti.UI.createWindow({
 		title: contact.getName(),
-		backgroundColor:'#eee',
-		barColor: '#0ba711',
+		barColor: 'black',
+		barImage: 'images/navbar_leather.png',
+		backgroundColor:'white',
+		backgroundImage: 'images/bg_white.png',
 	});
 	
 	var data = [

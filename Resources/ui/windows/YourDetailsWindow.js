@@ -1,83 +1,57 @@
 function YourDetailsWindow(parentWindow) {
 	var self = Ti.UI.createWindow({
 		title:'Your Details',
-		backgroundColor:'#eee',
 		parentWindow: parentWindow,
+		containingTab: parentWindow.containingTab,
 		backButtonTitle: 'Back',
-		barColor: '#0ba711',
+		barColor: 'black',
+		barImage: 'images/navbar_leather.png',
+		backgroundColor:'white',
+		backgroundImage: 'images/bg_lined.png',
 	});
 	
-	//add in a first name container view
-	var firstNameView = Ti.UI.createView({
-		top: 20,
+	var firstNameField = Ti.UI.createTextField({
+		top: 15,
 		left: 20,
 		width: 280,
 		height: 55,
-		borderWidth: 1,
-		borderRadius: 5,
-		borderColor: '#999',
-		backgroundColor: '#fff',		
-	});
-	self.add(firstNameView);
-	
-	//add first name text field
-	var firstNameField = Ti.UI.createTextField({
-		top: 0,
 		hintText: 'First name',
 		left: 15,
 		width: 280,
 		height: 55,
-		font:{fontSize:24, fontFamily:'Helvetica Neue'},
+		font:{fontSize:46, fontFamily:'Rabiohead'},
+		color: '#01215b',
 	});
-	firstNameView.add(firstNameField);
+	self.add(firstNameField);
 	
-	//add in a last name container view
-	var lastNameView = Ti.UI.createView({
+	var lastNameField = Ti.UI.createTextField({
 		top: 85,
 		left: 20,
 		width: 280,
 		height: 40,
-		borderWidth: 1,
-		borderRadius: 5,
-		borderColor: '#999',
-		backgroundColor: '#fff',		
-	});
-	self.add(lastNameView);
-	
-	//add first name text field
-	var lastNameField = Ti.UI.createTextField({
-		top: 0,
 		hintText: 'Last name (optional)',
 		left: 15,
 		width: 280,
 		height: 40,
-		font:{fontSize:18, fontFamily:'Helvetica Neue'},
+		font:{fontSize:32, fontFamily:'Rabiohead'},
+		color: '#01215b',
 	});
-	lastNameView.add(lastNameField);
+	self.add(lastNameField);
 
-	//add in an email container view
-	var emailView = Ti.UI.createView({
-		top: 135,
+	//add first name text field
+	var emailField = Ti.UI.createTextField({
+		top: 145,
 		left: 20,
 		width: 280,
 		height: 40,
-		borderWidth: 1,
-		borderRadius: 5,
-		borderColor: '#999',
-		backgroundColor: '#fff',		
-	});
-	self.add(emailView);
-	
-	//add first name text field
-	var emailField = Ti.UI.createTextField({
-		top: 0,
 		hintText: 'Email address (optional)',
 		left: 15,
 		width: 280,
 		height: 40,
-		font:{fontSize:18, fontFamily:'Helvetica Neue'},
+		font:{fontSize:32, fontFamily:'Rabiohead'},
+		color: '#01215b',
 	});
-	emailView.add(emailField);
+	self.add(emailField);
 	
 	var cameraButton = Ti.UI.createButton({
 		top: 215,
@@ -97,7 +71,8 @@ function YourDetailsWindow(parentWindow) {
 		left: 20,
 		width: 100,
 		height: 100,
-		visible: false
+		visible: false,
+		
 	});
 	self.add(photoPreview);
 	
@@ -220,8 +195,8 @@ function YourDetailsWindow(parentWindow) {
 			// Show thank you window
 			var ThankYouWindow = require('ui/windows/ThankYouWindow'),
 				thankYouWindow = new ThankYouWindow(self);
-			
-			self.containingTab.open();
+				
+			self.containingTab.open(thankYouWindow);
 		}
 	});
 	

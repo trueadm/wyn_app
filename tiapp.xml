@@ -8,10 +8,10 @@
         <target device="blackberry">false</target>
     </deployment-targets>
     <sdk-version>2.1.2.GA</sdk-version>
-    <id>com.internal.wyn</id>
+    <id>com.101010.wyn</id>
     <name>WYN</name>
     <version>1.0</version>
-    <publisher>ADM</publisher>
+    <publisher>101010 Digital</publisher>
     <url>http://www.101010digital.com</url>
     <description>What's Your Number</description>
     <copyright>2012 by 101010 Digital</copyright>

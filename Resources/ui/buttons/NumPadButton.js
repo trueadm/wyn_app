@@ -1,29 +1,45 @@
 function NumPadButton(buttonNumber, buttonLeft, buttonTop) {
 	var self = Ti.UI.createButton({
-		width: 95,
-		height: 55,
-		backgroundColor:'#eee',
+		width: 90,
+		height: 65,
 		top: buttonTop,
 		left: buttonLeft,
-		backgroundImage: 'images/keypad_button.png',
-		backgroundSelectedImage: 'images/keypad_button_sel.png',
+		backgroundImage: 'images/phone_key.png',
+		backgroundSelectedImage: 'images/phone_key_down.png',
 	});
 	
-	//add the number label
-	var buttonTextLabel = Ti.UI.createLabel({
+	var labelOptions = {
 		text: buttonNumber.toString(),
-		font:{fontSize:28,  fontFamily:'Helvetica Neue'},
+		font:{fontSize:36,  fontFamily:'Code Bold'},
 		textAlign:'center',
-		shadowOffset:{x:0,y:1},
-		shadowColor:'#fff',
-		color: '#444',
+		color: '#303030',
 		width: self.width,
 		zIndex: 2,
 		height: self.height, 
-		top: ((buttonNumber.toString() === '+') ? -3 : 0), //otherwise the plus goes down too far
-		touchEnabled: false,
-	});
+		top: -5,
+		left: 1,
+		touchEnabled: false
+	};
+	
+	// add the number label
+	var buttonTextLabel = Ti.UI.createLabel(labelOptions);
 	self.add(buttonTextLabel);
+
+	// add the number label for down state
+	// Simply moving to label lags and isn't in sync with the button bg
+	labelOptions.top = -2;
+	labelOptions.visible = false;
+	var buttonTextLabelDown = Ti.UI.createLabel(labelOptions);
+	self.add(buttonTextLabelDown);
+	
+	self.addEventListener('touchstart', function(){
+		buttonTextLabel.hide();
+		buttonTextLabelDown.show();
+	});
+	self.addEventListener('touchend', function(){
+		buttonTextLabelDown.hide();
+		buttonTextLabel.show();
+	});
 	
 	self.number = buttonNumber;
 	
