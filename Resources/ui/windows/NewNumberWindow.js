@@ -94,8 +94,8 @@ function NewNumberWindow(parentWindow) {
 		height: 66,
 		top: top,
 		left: 16,
-		backgroundImage: 'images/bigback_button.png',
-		backgroundSelectedImage: 'images/bigback_button_sel.png',
+		backgroundImage: 'images/phone_key_backspace.png',
+		backgroundSelectedImage: 'images/phone_key_backspace_down.png',
 	});
 	backspaceButton.addEventListener('touchend', removeDigit);
 	backspaceButton.addEventListener('longpress', self.clear);
