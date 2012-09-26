@@ -8,7 +8,7 @@ function SettingsWindow(parentWindow) {
 		parentWindow: parentWindow,
 	});
 	
-	var Settings = require('data/settings');
+	var Settings = require('data/Settings');
 	
 	var settingsTable = Ti.UI.createTableView({
 		top: 10,
