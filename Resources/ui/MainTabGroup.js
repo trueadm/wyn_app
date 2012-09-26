@@ -55,7 +55,7 @@ function MainTabGroup() {
 		self.myNumberWindow.containingTab = tab3;	
 		
 		var tab4 = Ti.UI.createTab({
-			title: L('Settings'),
+			title: 'Settings',
 			icon: '/images/tab_settings_icon.png',
 			window: self.settingsWindow
 		});
