@@ -24,10 +24,10 @@ function MainTabGroup() {
 		self.newNumberWindow = new NewNumberWindow(self);
 		
 		var ListWindow = require('ui/windows/ListWindow');
-		self.listWindow = new ListWindow();
+		self.listWindow = new ListWindow(self);
 		
 		var MyNumberWindow = require('ui/windows/MyNumberWindow');
-		self.myNumberWindow = new MyNumberWindow();	
+		self.myNumberWindow = new MyNumberWindow(self);	
 		
 		var SettingsWindow = require('ui/windows/SettingsWindow');
 		self.settingsWindow = new SettingsWindow(self);	

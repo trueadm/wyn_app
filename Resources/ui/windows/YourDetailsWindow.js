@@ -1,4 +1,10 @@
 function YourDetailsWindow(parentWindow) {
+	//Add Save button, but it at bottom of screen
+	var saveButton = Ti.UI.createButton({
+		title: 'Done',
+		enabled: false
+	});
+	
 	var self = Ti.UI.createWindow({
 		title:'Your Details',
 		parentWindow: parentWindow,
@@ -8,48 +14,58 @@ function YourDetailsWindow(parentWindow) {
 		barImage: 'images/navbar_leather.png',
 		backgroundColor:'white',
 		backgroundImage: 'images/bg_lined.png',
+		rightNavButton: saveButton,
 	});
 	
-	var firstNameField = Ti.UI.createTextField({
-		top: 15,
-		left: 20,
-		width: 280,
-		height: 55,
-		hintText: 'First name',
+	self.add(Ti.UI.createLabel({
+		top: 41,
 		left: 15,
-		width: 280,
-		height: 55,
-		font:{fontSize:46, fontFamily:'Rabiohead'},
+		text: 'FIRST NAME:',
+		font: {fontSize: 12}
+	}));
+	
+	var firstNameField = Ti.UI.createTextField({
+		top: 26,
+		left: 100,
+		width: 210,
+		font:{fontSize:32, fontFamily:'Rabiohead'},
 		color: '#01215b',
 	});
 	self.add(firstNameField);
 	
-	var lastNameField = Ti.UI.createTextField({
-		top: 85,
-		left: 20,
-		width: 280,
-		height: 40,
-		hintText: 'Last name (optional)',
+	self.add(Ti.UI.createLabel({
+		top: 71,
 		left: 15,
-		width: 280,
-		height: 40,
-		font:{fontSize:32, fontFamily:'Rabiohead'},
+		text: 'LAST NAME:',
+		font: {fontSize: 12}
+	}));
+	
+	var lastNameField = Ti.UI.createTextField({
+		top: 58,
+		left: 100,
+		width: 210,
+		hintText: '(optional)',
+		font:{fontSize:28, fontFamily:'Rabiohead'},
 		color: '#01215b',
 	});
 	self.add(lastNameField);
 
+	self.add(Ti.UI.createLabel({
+		top: 101,
+		left: 15,
+		text: 'EMAIL:',
+		font: {fontSize: 12}
+	}));
+
 	//add first name text field
 	var emailField = Ti.UI.createTextField({
-		top: 145,
-		left: 20,
-		width: 280,
-		height: 40,
-		hintText: 'Email address (optional)',
-		left: 15,
-		width: 280,
-		height: 40,
-		font:{fontSize:32, fontFamily:'Rabiohead'},
+		top: 88,
+		left: 100,
+		width: 210,
+		hintText: '(optional)',
+		font:{fontSize:28, fontFamily:'Rabiohead'},
 		color: '#01215b',
+		keyboardType: Ti.UI.KEYBOARD_EMAIL
 	});
 	self.add(emailField);
 	
@@ -76,34 +92,18 @@ function YourDetailsWindow(parentWindow) {
 	});
 	self.add(photoPreview);
 	
-	//Add Save button, but it at bottom of screen
-	var saveButton = Ti.UI.createButton({
-		height:55,
-		width:288,
-		//title:L('Save'),
-		bottom: 12,
-		backgroundImage: 'images/add_button.png',
-	});
-	self.add(saveButton);
-	
-	//we use a label as we have better control over how it looks via the title of a button
-	var buttonTextLabel = Ti.UI.createLabel({
-		text: 'Save',
-		font:{fontSize:22, fontWeight: 'bold', fontFamily:'Helvetica Neue'},
-		textAlign:'center',
-		shadowOffset:{x:0,y:2},
-		shadowColor:'#16950d',
-		color: '#fff',
-		width: saveButton.width,
-		zIndex: 2,
-		height: saveButton.height - 5,
-		touchEnabled: false,
-	});
-	saveButton.add(buttonTextLabel);
+	self.containingTab.setRightNavButton(saveButton);
 	
 	// Focus first name field on load
 	self.addEventListener('open', function() {
 		firstNameField.focus();	
+	});
+	
+	firstNameField.addEventListener('return', function(){
+		lastNameField.focus();
+	});
+	lastNameField.addEventListener('return', function(){
+		emailField.focus();
 	});
 	
 	function setPhoto(photo) {
@@ -140,6 +140,14 @@ function YourDetailsWindow(parentWindow) {
 	
 	clearPhotoButton.addEventListener('click', clearPhoto);
 	
+	firstNameField.addEventListener('change', function(event) {
+		if (firstNameField.value) {
+			saveButton.enabled = true;	
+		} else {
+			saveButton.enabled = false;
+		}
+	});
+	
 	saveButton.addEventListener('click', function(){
 		// Validate form
 		var error;
@@ -173,23 +181,29 @@ function YourDetailsWindow(parentWindow) {
 			
 			// Try to get geo location
 			
-			// Null by default
-			var coords = null;
-			
 			Titanium.Geolocation.accuracy = Ti.Geolocation.ACCURACY_HIGH;
 			Ti.Geolocation.purpose = 'Tag number with your current location';
+		
+			var AppContacts = require('data/AppContacts');
+			var contact = {
+				id: phoneContact.recordId,
+				coords: null,
+				places: null,
+				created: new Date().getTime()
+			};
 			
 			Ti.Geolocation.getCurrentPosition(function(event) {
 				if (event.success) {
-					coords = event.coords
+					contact.coords = event.coords;
+					Ti.Geolocation.reverseGeocoder(event.coords.latitude, event.coords.longitude, function(response) {
+						if (response.success) {
+							contact.places = response.places;
+						}
+						AppContacts.add(contact);
+					})
+				} else {
+					AppContacts.add(contact);
 				}
-				// Store contact
-				var AppContacts = require('data/AppContacts');
-				AppContacts.add({
-					id: phoneContact.recordId,
-					coords: event.coords,
-					created: new Date().getTime()
-				});
 			});
 			
 			// Show thank you window

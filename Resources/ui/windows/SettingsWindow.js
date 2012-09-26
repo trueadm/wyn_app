@@ -11,7 +11,7 @@ function SettingsWindow(parentWindow) {
 	var Settings = require('data/settings');
 	
 	var settingsTable = Ti.UI.createTableView({
-		style:Titanium.UI.iPhone.TableViewStyle.GROUPED
+		top: 10,
 	});
 	self.add(settingsTable);
 	

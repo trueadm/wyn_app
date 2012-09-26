@@ -1,20 +1,22 @@
-function ListWindow() {
+function ListWindow(parentWindow) {
 	var self = Ti.UI.createWindow({
 		title:'Recently added',
 		barColor: 'black',
 		barImage: 'images/navbar_leather.png',
 		backgroundColor:'white',
 		backgroundImage: 'images/bg_white.png',
+		parentWindow: parentWindow,
 	});
 	
 	var table = Ti.UI.createTableView({
-		style: Titanium.UI.iPhone.TableViewStyle.GROUPED
+		top: 10,
+		//style: Titanium.UI.iPhone.TableViewStyle.GROUPED
 	});
 	self.add(table);
 	
 	table.addEventListener('click', function(event) {
 		var ContactDetailWindow = require('ui/windows/ContactDetailWindow');
-		self.containingTab.open(new ContactDetailWindow(event.rowData.contact));
+		self.containingTab.open(new ContactDetailWindow(self, event.rowData.contact));
 	});
 	
 	self.populateTable = function() {
@@ -35,6 +37,7 @@ function ListWindow() {
 				var row = {
 					title: contact.getName(),
 					hasDetail: true,
+					className: 'listItem',
 					contact: contact
 				};
 				// Add heading for first of each group

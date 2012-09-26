@@ -3,7 +3,7 @@ function NewNumberWindow(parentWindow) {
 		title:'What’s your number?',
 		barColor: 'black',
 		barImage: 'images/navbar_leather.png',
-		backgroundImage: 'images/numpad_bg.png',
+		backgroundImage: 'images/bg_numpad.png',
 		parentWindow: parentWindow,
 	});
 	
@@ -21,12 +21,14 @@ function NewNumberWindow(parentWindow) {
 	//add a label that will display the number
 	var numberLabel = Ti.UI.createLabel({
 		text: '',
-		font:{fontSize:46, fontWeight: 'bold', fontFamily:'Rabiohead'},
+		font:{fontSize:50, fontWeight: 'bold', fontFamily:'Rabiohead'},
+		minimumFontSize: 12,
 		textAlign:'center',
-		width: 300,
+		width: 290,
+		height: 50,
 		color: '#01215b',
-		left: 10,
-		top: 15,
+		left: 15,
+		top: 20,
 	});
 	self.add(numberLabel);
 	
@@ -93,7 +95,7 @@ function NewNumberWindow(parentWindow) {
 		width: 91,
 		height: 66,
 		top: top,
-		left: 16,
+		left: 216,
 		backgroundImage: 'images/phone_key_backspace.png',
 		backgroundSelectedImage: 'images/phone_key_backspace_down.png',
 	});
@@ -106,7 +108,7 @@ function NewNumberWindow(parentWindow) {
 		width: 91,
 		height: 66,
 		top: top,
-		left: 216,
+		left: 16,
 		backgroundImage: 'images/phone_key_submit.png',
 		backgroundSelectedImage: 'images/phone_key_submit_down.png',
 	});
@@ -117,11 +119,11 @@ function NewNumberWindow(parentWindow) {
 		var error;
 		
 		// Validate
-		if (!self.phoneNumber) {
-			error = 'You didn\'t enter a number';
-		} else if (self.phoneNumber.length < 10) {
-			error = 'That number looks too short';
-		}
+		// if (!self.phoneNumber) {
+			// error = 'You didn\'t enter a number';
+		// } else if (self.phoneNumber.length < 10) {
+			// error = 'That number looks too short';
+		// }
 		
 		if (error) {
 			var statusAlert = Titanium.UI.createAlertDialog({
