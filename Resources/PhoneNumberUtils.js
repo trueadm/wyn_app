@@ -1,29 +1,129 @@
+"use strict";
+
+var validPatterns = [
+  // International
+  /^00([0-9]{3,14}$)/,
+
+  // UK formats taken from http://www.area-codes.org.uk/formatting.php
+  
+  // 01### ######]
+  /^01([0-9]{3})([0-9]{5,6})$/,
+  // 011# ### ####
+  /^011([0-9])([0-9]{3})([0-9]{4})$/,
+  // 01#1 ### ####
+  /^01([0-9])1([0-9]{3})([0-9]{4})$/,
+  // 013873 #####
+  // 015242 #####
+  // 015394 #####
+  // 015395 #####
+  // 015396 #####
+  // 016973 #####
+  // 016974 #####
+  // 017683 #####
+  /^01(3873|5242|5394|5395|5396|6973|6974|7683|7684|7687|9467)([0-9]{5})$/,
+  // 016977 #####]
+  /^016977([0-9]{4,5})$/,
+  // 02# #### ####
+  /^02([0-9])([0-9]{4})([0-9]{4})$/,
+  // 03## ### ####
+  /^03([0-9]{2})([0-9]{3})([0-9]{4})$/,
+  // 05### ######
+  /^05([0-9]{3})([0-9]{6})$/,
+  // 0500 ######
+  /^0500([0-9]{6})$/,
+  // 07### ######
+  /^07([0-9]{3})([0-9]{6})$/,
+  // 08## ### ####]
+  /^08([0-9]{2})([0-9]{3})([0-9]{3,4})$/,
+  // 09## ### ####
+  /^09([0-9]{2})([0-9]{3})([0-9]{4})$/
+];
+
+var partialPatterns = [
+  // First digit
+  [/^0$/, '0'],
+
+  // International
+  [/^00([0-9]{1,14})$/, '00 $1'],
+  
+  // UK formats taken from http://www.area-codes.org.uk/formatting.php
+
+  // 01### #####[#]
+  [/^01([0-9]{3})([0-9]{1,6})$/, '01$1 $2'],
+  // 011# ### ####
+  [/^011([0-9])([0-9]{1,3})$/, '011$1 $2'],
+  [/^011([0-9])([0-9]{3})([0-9]{1,4})$/, '011$1 $2 $3'],
+  // 01#1 ### ####
+  [/^01([0-9])1([0-9]{1,3})$/, '01$11 $2'],
+  [/^01([0-9])1([0-9]{3})([0-9]{1,4})$/, '01$11 $2 $3'],
+  // 013873 #####
+  // 015242 #####
+  // 015394 #####
+  // 015395 #####
+  // 015396 #####
+  // 016973 #####
+  // 016974 #####
+  // 017683 #####
+  [/^01(3873|5242|5394|5395|5396|6973|6974|7683|7684|7687|9467)([0-9]{1,5})$/, '01$1 $2'],
+  // 016977 ####[#]
+  [/^016977([0-9]{1,5})$/, '016977 $1'],
+  // 02# #### ####
+  [/^02([0-9])([0-9]{1,4})$/, '02$1 $2'],
+  [/^02([0-9])([0-9]{4})([0-9]{1,4})$/, '02$1 $2 $3'],
+  // 03## ### ####
+  [/^03([0-9]{2})([0-9]{1,3})$/, '03$1 $2'],
+  [/^03([0-9]{2})([0-9]{3})([0-9]{1,4})$/, '03$1 $2 $3'],
+  // 05### ######
+  [/^05([0-9]{3})([0-9]{1,6})$/, '05$1 $2'],
+  // 0500 ######
+  [/^0500([0-9]{1,6})$/, '0500 $1'],
+  // 07### ######
+  [/^07([0-9]{3})([0-9]{1,6})$/, '07$1 $2'],
+  // 08## ### ###[#]
+  [/^08([0-9]{2})([0-9]{1,3})$/, '08$1 $2'],
+  [/^08([0-9]{2})([0-9]{3})([0-9]{1,4})$/, '08$1 $2 $3'],
+  // 09## ### ####
+  [/^09([0-9]{2})([0-9]{1,3})$/, '09$1 $2'],
+  [/^09([0-9]{2})([0-9]{3})([0-9]{1,4})$/, '09$1 $2 $3'],
+  
+  // Anything longer than this should match one of the previous patterns
+  [/^0(0|1|2|3|5|7|8|9)([0-9]{0,3})$/, '0$1$2']
+];
+
 /**
- * Add spaces to phone nubmer
+ * Add spaces to phone number
  * @param {String} number
  */
 exports.formatNumber = function (number) {
-	var formatted = number;
-	// International prefix
-	formatted = formatted.replace(/^00/, '00 ');
-	// International code
-	formatted = formatted.replace(/^00 ([0-9]{2})/, '00 $1 ');
-	// National code following international prefix/code
-	formatted = formatted.replace(/^00 ([0-9]{2} [0-9]{4})/, '00 $1 ');
-	// National code
-	formatted = formatted.replace(/^(0?)([0-9]{4})/, '$1$2 ');
-	
-	return formatted;
-}
+  var formatted = null;
+  partialPatterns.forEach(function (rule) {
+    var pattern = rule[0],
+      replace = rule[1];
+    if (!formatted && number.match(pattern)) {
+      formatted = number.replace(pattern, replace);
+    }
+  });
+  return formatted;
+};
 
-exports.tooLong = function(number) {
-	var maxLength;
-	// International
-	if (number.indexOf('00') === 0) {
-		maxLength = 14;
-	// UK
-	} else {
-		maxLength = 11;
-	}
-	return number.length > maxLength;
-}
+exports.isValid = function (number) {
+  var valid = false;
+  validPatterns.forEach(function (pattern) {
+    if (!valid && number.match(pattern)) {
+      valid = true;
+    }
+  });
+  return valid;
+};
+
+exports.getType = function (number) {
+  var type;
+  if (number.indexOf('07') === 0) {
+    type = 'mobile';
+  } else if (number.indexOf('00') === 0) {
+    type = 'international';
+  } else {
+    type = 'landline';
+  }
+  return type;
+};

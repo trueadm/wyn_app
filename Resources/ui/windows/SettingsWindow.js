@@ -1,108 +1,89 @@
-function SettingsWindow(parentWindow) {
-	var self = Ti.UI.createWindow({
-		title:'Settings',
-		barColor: 'black',
-		barImage: 'images/navbar_leather.png',
-		backgroundColor:'white',
-		backgroundImage: 'images/bg_white.png',
-		parentWindow: parentWindow,
-	});
-	
-	var Settings = require('data/Settings');
-	
-	var settingsTable = Ti.UI.createTableView({
-		top: 10,
-	});
-	self.add(settingsTable);
-	
-	// Your name:
-	
-	var yourName = Ti.UI.createTableViewRow({
-		header:'Your details',
-		title: 'Your name',
-	});
-	settingsTable.appendRow(yourName);
-	
-	// Add text field to row
-	var yourNameField = Ti.UI.createTextField({
-		left: 140,
-		width: 140,
-		height: 45,
-		color: '#0ba711',
-		borderStyle: Ti.UI.INPUT_BORDERSTYLE_NONE,
-		value: Settings.get('name')
-	});
-	yourName.add(yourNameField);
-	
-	// Make entire row focus text field
-	yourName.addEventListener('click', function() {
-		yourNameField.focus();
-	});
-	// Update settings on blur
-	yourNameField.addEventListener('blur', function() {
-		Settings.set('name', yourNameField.value);
-	});
-	
-	// Your nubmer:
-	
-	var yourNumber = Ti.UI.createTableViewRow({
-		title: 'Your number'
-	});
-	settingsTable.appendRow(yourNumber);
-	
-	// Add text field to row
-	var yourNumberField = Ti.UI.createTextField({
-		left: 140,
-		width: 140,
-		height: 45,
-		color: '#0ba711',
-		borderStyle: Ti.UI.INPUT_BORDERSTYLE_NONE,
-		value: Settings.get('number'),
-		keyboardType: Ti.UI.KEYBOARD_PHONE_PAD
-	});
-	yourNumber.add(yourNumberField);
-	
-	// Make entire row focus text field
-	yourNumber.addEventListener('click', function() {
-		yourNumberField.focus();
-	});
-	// Update settings on blur
-	yourNumberField.addEventListener('blur', function() {
-		Settings.set('number', yourNumberField.value);
-	});
-	
-	// Facebook login / logout:
-	
-	var fbLogin = Ti.UI.createTableViewRow({
-		header:'Social Media',
-		selectedBackgroundColor: '#0ba711'
-	});
-	settingsTable.appendRow(fbLogin);
-	
-	// Callback to update text based on logged in state
-	var setFbLoginState = function() {
-		if (Ti.Facebook.loggedIn) {
-			fbLogin.title = 'Disconnect from Facebook';
-		} else {
-			fbLogin.title = 'Connect to Facebook';
-		}
-	}
-	
-	// Add callbacks to events and call now
-	Ti.Facebook.addEventListener('login', setFbLoginState);
-	Ti.Facebook.addEventListener('logout', setFbLoginState);
-	setFbLoginState();
-	
-	fbLogin.addEventListener('click', function(){
-		if (Ti.Facebook.loggedIn) {
-			Ti.Facebook.logout();
-		} else {
-			Ti.Facebook.authorize();
-		}
-	});
-		
-	return self;
-};
+"use strict";
 
-//as we're getting this window as a part of a require, we'll need to expose the scope
+var Settings = require('data/Settings');
+
+function SettingsWindow(parentWindow) {
+  var bg = '/images/bg_white.png';
+  if (Ti.Platform.displayCaps.platformHeight === 568) {
+    bg = '/images/bg_white-568h.png';
+  }
+  
+  var self = Ti.UI.createWindow({
+    title: 'Settings',
+    barColor: 'black',
+    barImage: 'images/navbar_leather.png',
+    backgroundColor: 'white',
+    backgroundImage: bg,
+    parentWindow: parentWindow
+  });
+
+  self.add(Ti.UI.iOS.createAdView({
+    adSize: Ti.UI.iOS.AD_SIZE_PORTRAIT,
+    bottom: 0
+  }));
+  
+  var settingsTable = Ti.UI.createTableView({top: 10, bottom: 50});
+  self.add(settingsTable);
+  
+  // Your name:
+  
+  var yourName = Ti.UI.createTableViewRow({
+    header: 'Your details',
+    title: 'Your name'
+  });
+  settingsTable.appendRow(yourName);
+  
+  // Add text field to row
+  var yourNameField = Ti.UI.createTextField({
+    left: 150,
+    width: 160,
+    height: 45,
+    minimumFontSize: 9,
+    color: '#999999',
+    borderStyle: Ti.UI.INPUT_BORDERSTYLE_NONE,
+    value: Settings.get('name')
+  });
+  yourName.add(yourNameField);
+  
+  // Make entire row focus text field
+  yourName.addEventListener('click', function () {
+    yourNameField.focus();
+  });
+  // Update settings on blur
+  yourNameField.addEventListener('blur', function () {
+    Settings.set('name', yourNameField.value);
+  });
+  
+  // Your number:
+  
+  var yourNumber = Ti.UI.createTableViewRow({
+    title: 'Your number'
+  });
+  settingsTable.appendRow(yourNumber);
+  
+  // Add text field to row
+  var yourNumberField = Ti.UI.createTextField({
+    left: 150,
+    width: 160,
+    height: 45,
+    color: '#999999',
+    minimumFontSize: 9,
+    borderStyle: Ti.UI.INPUT_BORDERSTYLE_NONE,
+    value: Settings.get('number'),
+    keyboardType: Ti.UI.KEYBOARD_PHONE_PAD
+  });
+  yourNumber.add(yourNumberField);
+  
+  // Make entire row focus text field
+  yourNumber.addEventListener('click', function () {
+    yourNumberField.focus();
+  });
+  // Update settings on blur
+  yourNumberField.addEventListener('blur', function () {
+    Settings.set('number', yourNumberField.value);
+  });
+  
+  return self;
+}
+
 module.exports = SettingsWindow;

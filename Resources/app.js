@@ -1,3 +1,4 @@
+"use strict";
 /*
  * A tabbed application, consisting of multiple stacks of windows associated with tabs in a tab group.  
  * A starting point for tab-based application with multiple top-level windows. 
@@ -11,19 +12,12 @@
  */
 
 //bootstrap and check dependencies
-if (Ti.version < 1.8 ) {
-	alert('Sorry - this application template requires Titanium Mobile SDK 1.8 or later');
+if (Ti.version < 1.8) {
+  alert('Sorry - this application template requires Titanium Mobile SDK 1.8 or later');
 }
 
-// This is a single context application with mutliple windows in a stack
-(function() {
-	
-	Ti.Facebook.appid = '3748181557';
-	Ti.Facebook.permissions = [
-		'user_status', 'email'
-	];
-	
-	var MainTabGroup = require('ui/MainTabGroup');
-	new MainTabGroup().open();
-
-})();
+// This is a single context application with multiple windows in a stack
+(function () {
+  var MainTabGroup = require('ui/MainTabGroup');
+  new MainTabGroup().open();
+}());
