@@ -57,39 +57,52 @@ Contact.prototype = {
 
   save: function () {
     var self = this;
-    
-    this.created = new Date().getTime();
-    this.id = this.createPhoneContact().recordId;
-    
-    Titanium.Geolocation.accuracy = Ti.Geolocation.ACCURACY_HIGH;
-    Ti.Geolocation.purpose = 'Tag number with your current location';
 
-    Ti.Geolocation.getCurrentPosition(function (event) {
-      if (event.success) {
-        self.coords = event.coords;
-        
-        // Now try to get place name
-        Ti.Geolocation.reverseGeocoder(event.coords.latitude, event.coords.longitude, function (response) {
-          if (response.success) {
-            self.places = response.places;
-          }
+    var doSave = function () {
+      self.created = new Date().getTime();
+      self.id = self.createPhoneContact().recordId;
+      
+      Titanium.Geolocation.accuracy = Ti.Geolocation.ACCURACY_HIGH;
+      Ti.Geolocation.purpose = 'Tag number with your current location';
+
+      Ti.Geolocation.getCurrentPosition(function (event) {
+        if (event.success) {
+          self.coords = event.coords;
+          
+          // Now try to get place name
+          Ti.Geolocation.reverseGeocoder(event.coords.latitude, event.coords.longitude, function (response) {
+            if (response.success) {
+              self.places = response.places;
+            }
+            AppContacts.add({
+              id: self.id,
+              coords: self.coords,
+              places: self.places,
+              created: self.created
+            });
+          });
+        } else {
           AppContacts.add({
             id: self.id,
             coords: self.coords,
             places: self.places,
             created: self.created
           });
-        });
-      } else {
-        AppContacts.add({
-          id: self.id,
-          coords: self.coords,
-          places: self.places,
-          created: self.created
-        });
-      }
-    });
+        }
+      });
+    };
+
+    if (Ti.Contacts.contactsAuthorization === Ti.Contacts.AUTHORIZATION_AUTHORIZED) {
+      doSave();
+    } else if (Ti.Contacts.contactsAuthorization === Ti.Contacts.AUTHORIZATION_UNKNOWN) {
+      Ti.Contacts.requestAuthorization(function (e) {
+        if (e.success) {
+          doSave();
+        }
+      });
+    }
   },
+
 
   createPhoneContact: function () {
     var contactPhone = {};
@@ -185,18 +198,7 @@ Contact.prototype = {
   getPlaceName: function () {
     var placeName = null;
     if (this.hasAddress()) {
-      var place = this.places[0];
-      var output = [];
-      if (place.street) {
-        output.push(place.street);
-      }
-      if (place.city) {
-        output.push(place.city);
-      }
-      if (place.zipcode) {
-        output.push(place.zipcode);
-      }
-      placeName = output.join(', ');
+      placeName = this.places[0].address;
     } else if (this.hasCoords()) {
       placeName = this.coords.latitude.toFixed(7) + ', ' + this.coords.longitude.toFixed(7);
     }
