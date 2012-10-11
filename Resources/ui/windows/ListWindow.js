@@ -41,12 +41,15 @@ function ListWindow(parentWindow) {
     
     // Loop through app contacts in reverse order (newest first)
     appContacts.reverse().forEach(function (appContact) {
+      
+      Titanium.API.log('Adding contact: ' + JSON.stringify(appContact));
+      
       // Get model including associated phone data
       var contact = new Contact(appContact);
       
       // Only display if we have some details 
       // (the phone contact may have been deleted)        
-      if (contact.firstName) {
+      if (contact.getName()) {
         var row = {
           title: contact.getName(),
           hasDetail: true,
@@ -68,7 +71,15 @@ function ListWindow(parentWindow) {
   }
 
   Ti.App.addEventListener('contacts:change', populateTable);
-  populateTable();
+  
+  // Draw on first focus
+  var init = false;
+  self.addEventListener('focus', function () {
+    if (!init) {
+      populateTable();
+      init = true;
+    }
+  });
 
   return self;
 }

@@ -2,3 +2,4 @@ tmp
 build
 *.swp
 .fastdev.lock
+build.log

@@ -6,31 +6,12 @@ Logfile initialized
 [DEBUG] Waiting for device to be ready ...
 [TRACE] adb devices returned 1 devices/emulators
 [DEBUG] Device connected... (waited 0 seconds)
-[DEBUG] waited 0.022099 seconds on emulator to get ready
+[DEBUG] waited 0.017362 seconds on emulator to get ready
 [DEBUG] com.e101010.wyn installed? True
 [INFO] Fastdev server running, deploying in Fastdev mode
 [INFO] Copying CommonJS modules...
 [INFO] Copying project resources..
-[TRACE] COPYING MODIFIED FILE: /Users/graham/Documents/Titanium_Studio_Workspace/WYN/Resources/.app.js.swp => /Users/graham/Documents/Titanium_Studio_Workspace/WYN/build/android/bin/assets/Resources/.app.js.swp
-[TRACE] COPYING CREATED FILE: /Users/graham/Documents/Titanium_Studio_Workspace/WYN/Resources/.WYN.js.swp => /Users/graham/Documents/Titanium_Studio_Workspace/WYN/build/android/bin/assets/Resources/.WYN.js.swp
-[TRACE] COPYING MODIFIED FILE: /Users/graham/Documents/Titanium_Studio_Workspace/WYN/Resources/app.js => /Users/graham/Documents/Titanium_Studio_Workspace/WYN/build/android/bin/assets/Resources/app.js
-[TRACE] COPYING CREATED FILE: /Users/graham/Documents/Titanium_Studio_Workspace/WYN/Resources/ui/windows/.ContactDetailWindow.js.swp => /Users/graham/Documents/Titanium_Studio_Workspace/WYN/build/android/bin/assets/Resources/ui/windows/.ContactDetailWindow.js.swp
-[TRACE] COPYING CREATED FILE: /Users/graham/Documents/Titanium_Studio_Workspace/WYN/Resources/ui/windows/.ContactMapWindow.js.swp => /Users/graham/Documents/Titanium_Studio_Workspace/WYN/build/android/bin/assets/Resources/ui/windows/.ContactMapWindow.js.swp
-[TRACE] COPYING CREATED FILE: /Users/graham/Documents/Titanium_Studio_Workspace/WYN/Resources/ui/windows/.ListWindow.js.swp => /Users/graham/Documents/Titanium_Studio_Workspace/WYN/build/android/bin/assets/Resources/ui/windows/.ListWindow.js.swp
-[TRACE] COPYING CREATED FILE: /Users/graham/Documents/Titanium_Studio_Workspace/WYN/Resources/ui/windows/.MyNumberWindow.js.swp => /Users/graham/Documents/Titanium_Studio_Workspace/WYN/build/android/bin/assets/Resources/ui/windows/.MyNumberWindow.js.swp
-[TRACE] COPYING CREATED FILE: /Users/graham/Documents/Titanium_Studio_Workspace/WYN/Resources/ui/windows/.NewNumberWindow.js.swp => /Users/graham/Documents/Titanium_Studio_Workspace/WYN/build/android/bin/assets/Resources/ui/windows/.NewNumberWindow.js.swp
-[TRACE] COPYING CREATED FILE: /Users/graham/Documents/Titanium_Studio_Workspace/WYN/Resources/ui/windows/.SettingsWindow.js.swp => /Users/graham/Documents/Titanium_Studio_Workspace/WYN/build/android/bin/assets/Resources/ui/windows/.SettingsWindow.js.swp
-[TRACE] COPYING CREATED FILE: /Users/graham/Documents/Titanium_Studio_Workspace/WYN/Resources/ui/windows/.ThankYouWindow.js.swp => /Users/graham/Documents/Titanium_Studio_Workspace/WYN/build/android/bin/assets/Resources/ui/windows/.ThankYouWindow.js.swp
-[TRACE] COPYING MODIFIED FILE: /Users/graham/Documents/Titanium_Studio_Workspace/WYN/Resources/ui/windows/.YourDetailsWindow.js.swp => /Users/graham/Documents/Titanium_Studio_Workspace/WYN/build/android/bin/assets/Resources/ui/windows/.YourDetailsWindow.js.swp
-[TRACE] COPYING MODIFIED FILE: /Users/graham/Documents/Titanium_Studio_Workspace/WYN/Resources/ui/windows/ContactDetailWindow.js => /Users/graham/Documents/Titanium_Studio_Workspace/WYN/build/android/bin/assets/Resources/ui/windows/ContactDetailWindow.js
-[TRACE] COPYING MODIFIED FILE: /Users/graham/Documents/Titanium_Studio_Workspace/WYN/Resources/ui/windows/ContactMapWindow.js => /Users/graham/Documents/Titanium_Studio_Workspace/WYN/build/android/bin/assets/Resources/ui/windows/ContactMapWindow.js
 [TRACE] COPYING MODIFIED FILE: /Users/graham/Documents/Titanium_Studio_Workspace/WYN/Resources/ui/windows/ListWindow.js => /Users/graham/Documents/Titanium_Studio_Workspace/WYN/build/android/bin/assets/Resources/ui/windows/ListWindow.js
-[TRACE] COPYING MODIFIED FILE: /Users/graham/Documents/Titanium_Studio_Workspace/WYN/Resources/ui/windows/MyNumberWindow.js => /Users/graham/Documents/Titanium_Studio_Workspace/WYN/build/android/bin/assets/Resources/ui/windows/MyNumberWindow.js
-[TRACE] COPYING MODIFIED FILE: /Users/graham/Documents/Titanium_Studio_Workspace/WYN/Resources/ui/windows/NewNumberWindow.js => /Users/graham/Documents/Titanium_Studio_Workspace/WYN/build/android/bin/assets/Resources/ui/windows/NewNumberWindow.js
-[TRACE] COPYING MODIFIED FILE: /Users/graham/Documents/Titanium_Studio_Workspace/WYN/Resources/ui/windows/SettingsWindow.js => /Users/graham/Documents/Titanium_Studio_Workspace/WYN/build/android/bin/assets/Resources/ui/windows/SettingsWindow.js
-[TRACE] COPYING MODIFIED FILE: /Users/graham/Documents/Titanium_Studio_Workspace/WYN/Resources/ui/windows/ThankYouWindow.js => /Users/graham/Documents/Titanium_Studio_Workspace/WYN/build/android/bin/assets/Resources/ui/windows/ThankYouWindow.js
-[TRACE] COPYING MODIFIED FILE: /Users/graham/Documents/Titanium_Studio_Workspace/WYN/Resources/ui/windows/YourDetailsWindow.js => /Users/graham/Documents/Titanium_Studio_Workspace/WYN/build/android/bin/assets/Resources/ui/windows/YourDetailsWindow.js
-[TRACE] COPYING CREATED FILE: /Users/graham/Documents/Titanium_Studio_Workspace/WYN/Resources/WYN.js => /Users/graham/Documents/Titanium_Studio_Workspace/WYN/build/android/bin/assets/Resources/WYN.js
 [INFO] Tiapp.xml unchanged, skipping class generation
 [DEBUG] Processing Android resource drawables
 [DEBUG] found drawable-long-land-hdpi splash screen at /Users/graham/Documents/Titanium_Studio_Workspace/WYN/Resources/android/images/res-long-land-hdpi/default.png
@@ -47,4 +28,5 @@ Logfile initialized
 [INFO] Re-launching application ... WYN
 [INFO] Launching application ... WYN
 [TRACE] Launch output: Starting: Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.e101010.wyn/.WynActivity }
+Warning: Activity not started, its current task has been brought to the front
 

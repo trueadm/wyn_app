@@ -73,13 +73,15 @@ function ContactDetailWindow(parentWindow, contact) {
     });
   }
   
-  var toolbar = Titanium.UI.iOS.createToolbar({
-    items: buttons,
-    bottom: 0,
-    borderTop: true,
-    borderBottom: false
-  });
-  self.add(toolbar);
+  if (WYN.osname === 'iphone') {
+    var toolbar = Titanium.UI.iOS.createToolbar({
+      items: buttons,
+      bottom: 0,
+      borderTop: true,
+      borderBottom: false
+    });
+    self.add(toolbar);
+  }
   
   var table = Ti.UI.createTableView({
     top: '10dp',

@@ -4,46 +4,38 @@ var AppContacts = require('/data/AppContacts'),
   utils = require('/PhoneNumberUtils');
 
 function Contact(appContact) {
-  if (appContact) {
-    this.id = appContact.id;
-    this.coords = appContact.coords;
-    this.places = appContact.places;
-    this.created = new Date(appContact.created);
-       
-    // Get data from associated phone contact entry
-    if (this.id) {
-      this.setPhoneContact(Ti.Contacts.getPersonByID(this.id));
-    }
-  }
-}
+  this.id = null;
+  this.coords = null;
+  this.places = null;
+  this.created = null;
+  this.firstName = null;
+  this.lastName = null;
+  this.fullName = null;
+  this.phone = null;
+  this.image = null;
+  this.messages = [];
 
-Contact.prototype = {
-  id: null,
-  coords: null,
-  places: null,
-  created: null,
-  firstName: null,
-  lastName: null,
-  phone: null,
-  image: null,
-  messages: [],
-
-  isValid: function () {
+  this.isValid = function () {
     this.messages = [];
     if (!this.firstName) {
       this.messages.push('Please enter a name for this contact');
     }
     return (this.messages.length === 0);
-  },
+  };
 
-  getMessages: function () {
+  this.getMessages = function () {
     return this.messages;
-  },
+  };
 
-  setPhoneContact: function (phoneContact) {
+  this.setPhoneContact = function (phoneContact) {
+    Titanium.API.log('Phone contact: ' + JSON.stringify(phoneContact));
     if (phoneContact) {
-      this.firstName = phoneContact.firstName;
-      this.lastName = phoneContact.lastName;
+      if (!phoneContact.firstName && phoneContact.fullName) {
+        this.setName(phoneContact.fullName);
+      } else {
+        this.firstName = phoneContact.firstName;
+        this.lastName = phoneContact.lastName;
+      }
       this.image = phoneContact.image;
 
       // Get phone type in order of preference
@@ -55,9 +47,9 @@ Contact.prototype = {
         this.phone = phoneContact.phone.work[0];
       }
     }
-  },
+  };
 
-  save: function () {
+  this.save = function () {
     var self = this;
 
     var doSave = function () {
@@ -111,10 +103,9 @@ Contact.prototype = {
         }
       });
     }
-  },
+  };
 
-
-  createPhoneContact: function () {
+  this.createPhoneContact = function () {
     var contactPhone = {};
     contactPhone[this.getPhoneType()] = [this.phone];
     var person = {
@@ -129,32 +120,32 @@ Contact.prototype = {
     }
     var phoneContact = Ti.Contacts.createPerson(person);
     return phoneContact;
-  },
+  };
 
-  getPhoneType: function () {
+  this.getPhoneType = function () {
     var realType = utils.getType(this.phone);
     var contactType = 'home';
     if (realType === 'mobile') {
       contactType = 'mobile';
     }
     return contactType;
-  },
+  };
 
   /**
    * Get full formatted name
    */
-  getName: function () {
+  this.getName = function () {
     var name = this.firstName;
     if (this.lastName) {
       name += ' ' + this.lastName;
     }
     return name;
-  },
+  };
 
   /**
    * Tries to guess first/last names from a full name 
    */
-  setName: function (fullName) {
+  this.setName = function (fullName) {
     var names = fullName.split(' ');
     this.lastName = null;
     if (names.length > 1) {
@@ -163,12 +154,12 @@ Contact.prototype = {
     }
     // Put all other names in first name
     this.firstName = names.join(' ');
-  },
+  };
 
   /**
    * Get string to use as table heading
    */
-  getDateHeading: function () {
+  this.getDateHeading = function () {
     var now = new Date(),
       created = this.created,
       age = now.getTime() - created.getTime(),
@@ -190,22 +181,22 @@ Contact.prototype = {
       heading = 'Older';
     }
     return heading;
-  },
+  };
 
-  formatNumber: function () {
+  this.formatNumber = function () {
     return utils.formatNumber(this.phone);
-  },
+  };
 
-  formatCreated: function () {
+  this.formatCreated = function () {
     var date = this.created.getDate(),
       month = this.created.getMonth() + 1, //Months are zero based
       year = this.created.getFullYear(),
       hours = ('0' + this.created.getHours()).slice(-2),
       minutes = ('0' + this.created.getMinutes()).slice(-2);
     return hours + ':' + minutes + ' ' + date + "/" + month + "/" + year;
-  },
+  };
 
-  getPlaceName: function () {
+  this.getPlaceName = function () {
     var placeName = null;
     if (this.hasAddress()) {
       placeName = this.places[0].address;
@@ -213,15 +204,27 @@ Contact.prototype = {
       placeName = this.coords.latitude.toFixed(7) + ', ' + this.coords.longitude.toFixed(7);
     }
     return placeName;
-  },
+  };
 
-  hasCoords: function () {
+  this.hasCoords = function () {
     return (this.coords !== null);
-  },
+  };
   
-  hasAddress: function () {
+  this.hasAddress = function () {
     return (this.places !== null && this.places.length > 0);
+  };
+    
+  if (appContact) {
+    this.id = appContact.id;
+    this.coords = appContact.coords;
+    this.places = appContact.places;
+    this.created = new Date(appContact.created);
+       
+    // Get data from associated phone contact entry
+    if (this.id) {
+      this.setPhoneContact(Ti.Contacts.getPersonByID(this.id));
+    }
   }
-};
+}
 
 module.exports = Contact;
