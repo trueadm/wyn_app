@@ -1,9 +1,9 @@
 "use strict";
 
-var Settings = require('data/Settings'),
-  NewNumberWindow = require('ui/windows/NewNumberWindow'),
-  ListWindow = require('ui/windows/ListWindow'),
-  MyNumberWindow = require('ui/windows/MyNumberWindow');
+var Settings = require('/data/Settings'),
+  NewNumberWindow = require('/ui/windows/NewNumberWindow'),
+  ListWindow = require('/ui/windows/ListWindow'),
+  MyNumberWindow = require('/ui/windows/MyNumberWindow');
 
 function MainTabGroup() {
   var self = Ti.UI.createTabGroup();

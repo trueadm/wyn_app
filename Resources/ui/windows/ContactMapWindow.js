@@ -1,20 +1,20 @@
 "use strict";
 
+var _ = require('underscore')._,
+  WYN = require('WYN');
+
 function ContactMapWindow(parentWindow, contact) {
   var bg = '/images/bg_white.png';
   if (Ti.Platform.displayCaps.platformHeight === 568) {
     bg = '/images/bg_white-568h.png';
   }
   
-  var self = Ti.UI.createWindow({
+  var self = Ti.UI.createWindow(_.extend({
     title: 'Added here',
-    barColor: 'black',
-    barImage: 'images/navbar_leather.png',
-    backgroundColor: 'white',
     backgroundImage: bg,
     parentWindow: parentWindow,
     containingTab: parentWindow.containingTab
-  });
+  }, WYN.styles.windowBar));
   
   var addedLocation = Titanium.Map.createAnnotation({
     latitude: contact.coords.latitude,

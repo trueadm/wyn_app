@@ -1,6 +1,9 @@
 "use strict";
 
-var Contact = require('model/Contact');
+var _ = require('underscore')._,
+  WYN = require('WYN'),
+  Contact = require('model/Contact'),
+  ThankYouWindow = require('/ui/windows/ThankYouWindow');
 
 function YourDetailsWindow(parentWindow) {
   
@@ -8,104 +11,75 @@ function YourDetailsWindow(parentWindow) {
   if (Ti.Platform.displayCaps.platformHeight === 568) {
     bg = '/images/bg_lined-568h.png';
   }
-
-  var doneNavButton = Ti.UI.createButton({
-    title: 'Done',
-    style: Ti.UI.iPhone.SystemButtonStyle.BORDERED
-  });
   
-  var self = Ti.UI.createWindow({
+  var self = Ti.UI.createWindow(_.extend({
     title: 'Your Details',
     parentWindow: parentWindow,
     containingTab: parentWindow.containingTab,
     backButtonTitle: 'Back',
-    barColor: 'black',
-    barImage: 'images/navbar_leather.png',
-    backgroundColor: 'white',
-    backgroundImage: bg,
-    rightNavButton: doneNavButton
-  });
+    backgroundImage: bg
+  }, WYN.styles.windowBar));
+  
+  if (WYN.osname === 'iphone') {
+    var doneNavButton = Ti.UI.createButton({
+      title: 'Done',
+      style: Ti.UI.iPhone.SystemButtonStyle.BORDERED
+    });
+    self.rightNavButton = doneNavButton;  
+  }
   
   // Add fields
 
   self.add(Ti.UI.createLabel({
     text: 'NAME:',
-    top: 33,
-    left: 20,
-    right: 20,
-    font: {fontSize: 16, fontFamily: 'Baskerville'},
+    top: '33dp',
+    left: '20dp',
+    right: '20dp',
+    font: {fontSize: '16dp', fontFamily: 'Baskerville'},
     color: 'black'
   }));
   
   var nameField = Ti.UI.createTextField({
-    top: 60,
-    left: 20,
-    right: 20,
-    height: 38,
-    font: {fontSize: 38, fontFamily: 'Rabiohead'},
-    minimumFontSize: 12,
+    top: '60dp',
+    left: '20dp',
+    right: '20dp',
+    height: '38dp',
+    font: {fontSize: '38dp', fontFamily: 'Rabiohead'},
+    minimumFontSize: '12dp',
     color: '#01215b'
   });
   self.add(nameField);
   
-  var cameraButton = Ti.UI.createButton({
+  var cameraButton = Ti.UI.createButton(_.extend({
     title: 'Take a photo',
-    top: 135,
-    left: 20,
-    height: 30,
-    width: 100,
-    color: '#444',
-    font: {fontSize: 14},
-    style: Ti.UI.iPhone.SystemButtonStyle.PLAIN,
-    borderRadius: 5,
-    borderColor: '#ccc',
-    borderWidth: 2,
-    backgroundGradient: {
-      type: 'linear',
-      colors: ['#eee', '#ccc'],
-      startPoint: {x: 0, y: 0},
-      endPoint: {x: 0, y: 20},
-      backfillEnd: true
-    }
-  });
+    top: '135dp',
+    left: '20dp',
+    width: '100dp',
+  }, WYN.styles.buttonSmall));
   self.add(cameraButton);
   
-  var clearPhotoButton = Ti.UI.createButton({
-    top: 135,
-    right: 20,
-    height: 30,
-    width: 100,
+  var clearPhotoButton = Ti.UI.createButton(_.extend({
+    top: '135dp',
+    right: '20dp',
+    width: '100dp',
     title: 'Clear photo',
     visible: false,
-    color: '#444',
-    font: {fontSize: 14},
-    style: Ti.UI.iPhone.SystemButtonStyle.PLAIN,
-    borderRadius: 5,
-    borderColor: '#ccc',
-    borderWidth: 2,
-    backgroundGradient: {
-      type: 'linear',
-      colors: ['#eee', '#ccc'],
-      startPoint: {x: 0, y: 0},
-      endPoint: {x: 0, y: 20},
-      backfillEnd: true
-    }
-  });
+  }, WYN.styles.buttonSmall));
   self.add(clearPhotoButton);
   
   var photoContainer = Ti.UI.createView({
-    top: 120,
-    left: 20,
-    width: 152,
-    height: 152,
+    top: '120dp',
+    left: '20dp',
+    width: '152dp',
+    height: '152dp',
     visible: false,
     transform: Ti.UI.create2DMatrix({rotate: -10})
   });
   self.add(photoContainer);
   
   var shadow = Ti.UI.createView({
-    width: 151,
-    height: 151,
+    width: '151dp',
+    height: '151dp',
     right: 0,
     bottom: 0,
     opacity: 0.1,
@@ -115,34 +89,21 @@ function YourDetailsWindow(parentWindow) {
   
   var photoPreview = Ti.UI.createImageView({
     backgroundColor: 'white',
-    width: 150,
-    height: 150,
+    width: '150dp',
+    height: '150dp',
     top: 0,
     left: 0,
-    borderWidth: 8,
+    borderWidth: '8dp',
     borderColor: 'white'
   });
   photoContainer.add(photoPreview);
 
-  var doneButton = Ti.UI.createButton({
-    top: 294,
-    left: 20,
-    height: 40,
-    width: 280,
-    title: 'Done',
-    color: 'white',
-    style: Ti.UI.iPhone.SystemButtonStyle.PLAIN,
-    borderRadius: 5,
-    borderColor: 'black',
-    borderWidth: 2,
-    backgroundGradient: {
-      type: 'linear',
-      colors: ['#777', '#000001'],
-      startPoint: {x: 0, y: 0},
-      endPoint: {x: 0, y: 20},
-      backfillEnd: true
-    }
-  });
+  var doneButton = Ti.UI.createButton(_.extend({
+    bottom: '20dp',
+    left: '20dp',
+    right: '20dp',
+    title: 'Done'
+  }, WYN.styles.buttonPrimary));
   self.add(doneButton);
 
   // Events / callbacks
@@ -203,8 +164,7 @@ function YourDetailsWindow(parentWindow) {
       contact.save();
 
       // Show thank you window
-      var ThankYouWindow = require('ui/windows/ThankYouWindow'),
-        thankYouWindow = new ThankYouWindow(self, contact);
+      var thankYouWindow = new ThankYouWindow(self, contact);
       self.containingTab.open(thankYouWindow);
 
     } else {
@@ -219,7 +179,9 @@ function YourDetailsWindow(parentWindow) {
     }
   }
 
-  doneNavButton.addEventListener('click', save);
+  if (WYN.osname === 'iphone') {
+    doneNavButton.addEventListener('click', save);
+  }
   doneButton.addEventListener('click', save);
 
   return self;

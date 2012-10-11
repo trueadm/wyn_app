@@ -1,42 +1,44 @@
 "use strict";
 
+var _ = require('underscore')._,
+  WYN = require('WYN');
+
 function ThankYouWindow(parentWindow, contact) {
   var bg = '/images/bg_white.png';
   if (Ti.Platform.displayCaps.platformHeight === 568) {
     bg = '/images/bg_white-568h.png';
   }
   
-  var self = Ti.UI.createWindow({
+  var self = Ti.UI.createWindow(_.extend({
     title: 'Thank You!',
-    barColor: 'black',
-    barImage: 'images/navbar_leather.png',
-    backgroundColor: 'white',
     backgroundImage: bg,
     parentWindow: parentWindow,
     containingTab: parentWindow.containingTab,
     // Empty view to remove back button
     leftNavButton: Ti.UI.createView({})
-  });
+  }, WYN.styles.windowBar));
 
-  self.add(Ti.UI.iOS.createAdView({
-    adSize: Ti.UI.iOS.AD_SIZE_PORTRAIT,
-    bottom: 0
-  }));
+  if (Ti.Platform.osname === 'iphone') {
+    self.add(Ti.UI.iOS.createAdView({
+      adSize: Ti.UI.iOS.AD_SIZE_PORTRAIT,
+      bottom: 0
+    }));
+  }
 
   var message = Ti.UI.createLabel({
     text: contact.firstName + '’s number was saved',
-    top: 40,
-    left: 20,
-    right: 20,
+    top: '40dp',
+    left: '20dp',
+    right: '20dp',
     textAlign: 'center'
   });
   self.add(message);
   
   var newButton = Ti.UI.createButton({
-    top: 80,
+    top: '80dp',
     title: 'Add another number',
-    width: 200,
-    height: 40,
+    width: '200dp',
+    height: '40dp',
     color: 'white',
     style: Ti.UI.iPhone.SystemButtonStyle.PLAIN,
     borderRadius: 5,
@@ -46,7 +48,7 @@ function ThankYouWindow(parentWindow, contact) {
       type: 'linear',
       colors: ['#777', '#000001'],
       startPoint: {x: 0, y: 0},
-      endPoint: {x: 0, y: 20},
+      endPoint: {x: 0, y: '20dp'},
       backfillEnd: true
     }
   });
@@ -59,10 +61,10 @@ function ThankYouWindow(parentWindow, contact) {
   });
   
   var callButton = Ti.UI.createButton({
-    top: 130,
+    top: '130dp',
     title: 'Call number',
-    width: 130,
-    height: 40,
+    width: '130dp',
+    height: '40dp',
     color: '#444',
     style: Ti.UI.iPhone.SystemButtonStyle.PLAIN,
     borderRadius: 5,
@@ -72,7 +74,7 @@ function ThankYouWindow(parentWindow, contact) {
       type: 'linear',
       colors: ['#eee', '#ccc'],
       startPoint: {x: 0, y: 0},
-      endPoint: {x: 0, y: 20},
+      endPoint: {x: 0, y: '20dp'},
       backfillEnd: true
     }
   });
@@ -84,10 +86,10 @@ function ThankYouWindow(parentWindow, contact) {
   
   if (contact.getPhoneType() === 'mobile') {
     var textButton = Ti.UI.createButton({
-      top: 180,
+      top: '180dp',
       title: 'Text number',
-      height: 40,
-      width: 130,
+      height: '40dp',
+      width: '130dp',
       color: '#444',
       style: Ti.UI.iPhone.SystemButtonStyle.PLAIN,
       borderRadius: 5,
@@ -97,7 +99,7 @@ function ThankYouWindow(parentWindow, contact) {
         type: 'linear',
         colors: ['#eee', '#ccc'],
         startPoint: {x: 0, y: 0},
-        endPoint: {x: 0, y: 20},
+        endPoint: {x: 0, y: '20dp'},
         backfillEnd: true
       }
     });

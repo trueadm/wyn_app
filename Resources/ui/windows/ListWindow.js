@@ -1,6 +1,8 @@
 "use strict";
 
-var Contact = require('model/Contact'),
+var _ = require('underscore')._,
+  WYN = require('WYN'),
+  Contact = require('model/Contact'),
   AppContacts = require('data/AppContacts');
 
 function ListWindow(parentWindow) {
@@ -9,21 +11,22 @@ function ListWindow(parentWindow) {
     bg = '/images/bg_white-568h.png';
   }
   
-  var self = Ti.UI.createWindow({
+  var self = Ti.UI.createWindow(_.extend({
     title: 'Recently added',
-    barColor: 'black',
-    barImage: 'images/navbar_leather.png',
-    backgroundColor: 'white',
     backgroundImage: bg,
     parentWindow: parentWindow
-  });
+  }, WYN.styles.windowBar));
   
-  self.add(Ti.UI.iOS.createAdView({
-    adSize: Ti.UI.iOS.AD_SIZE_PORTRAIT,
-    bottom: 0
-  }));
+  var bottom = 0;
+  if (Ti.Platform.osname === 'iphone') {
+    self.add(Ti.UI.iOS.createAdView({
+      adSize: Ti.UI.iOS.AD_SIZE_PORTRAIT,
+      bottom: 0
+    }));
+    bottom = '50dp';
+  }
 
-  var table = Ti.UI.createTableView({top: 10, bottom: 50});
+  var table = Ti.UI.createTableView({top: '10dp', bottom: bottom});
   self.add(table);
   
   table.addEventListener('click', function (event) {

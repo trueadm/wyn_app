@@ -1,15 +1,17 @@
 "use strict";
 
+var _ = require('underscore')._,
+  WYN = require('WYN'),
+  ContactMapWindow = require('/ui/windows/ContactMapWindow');
+
 function ContactDetailWindow(parentWindow, contact) {
-  var self = Ti.UI.createWindow({
+  var self = Ti.UI.createWindow(_.extend({
     title: 'Info',
-    barColor: 'black',
-    barImage: 'images/navbar_leather.png',
     backgroundColor: 'white',
-    backgroundImage: 'images/bg_white.png',
+    backgroundImage: '/images/bg_white.png',
     parentWindow: parentWindow,
     containingTab: parentWindow.containingTab
-  });
+  }, WYN.styles.windowBar));
   
   var data = [
   ];
@@ -18,8 +20,8 @@ function ContactDetailWindow(parentWindow, contact) {
     var photoRow = Ti.UI.createTableViewRow();
     var image = Ti.UI.createImageView({
       left: 0,
-      width: 100,
-      height: 100
+      width: '100dp',
+      height: '100dp'
     });
     photoRow.add(image);
     data.push(photoRow);
@@ -39,7 +41,6 @@ function ContactDetailWindow(parentWindow, contact) {
     data.push(showMap);
     
     showMap.addEventListener('click', function () {
-      var ContactMapWindow = require('ui/windows/ContactMapWindow');
       self.containingTab.open(new ContactMapWindow(self, contact));
     });  
   }
@@ -81,8 +82,8 @@ function ContactDetailWindow(parentWindow, contact) {
   self.add(toolbar);
   
   var table = Ti.UI.createTableView({
-    top: 10,
-    bottom: 49,
+    top: '10dp',
+    bottom: '49dp',
     data: data
   });
   self.add(table);

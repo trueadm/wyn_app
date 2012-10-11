@@ -1,13 +1,50 @@
 Logfile initialized
-[INFO] logfile = /Volumes/StorageVol/Titanium/Workspaces/WYN/build.log
-[DEBUG] /Users/ADM/Library/Application Support/Titanium/mobilesdk/osx/2.1.2.GA/android/builder.py simulator WYN /Volumes/StorageVol/Titanium/Android SDK /Volumes/StorageVol/Titanium/Workspaces/WYN com.internal.wyn 6 HVGA 
+[INFO] logfile = /Users/graham/Documents/Titanium_Studio_Workspace/WYN/build.log
+[DEBUG] /Library/Application Support/Titanium/mobilesdk/osx/2.1.3.GA/android/builder.py simulator WYN /Users/graham/Android SDK /Users/graham/Documents/Titanium_Studio_Workspace/WYN com.e101010.wyn 2 WVGA854 
 [INFO] Building WYN for Android ... one moment
-[INFO] Titanium SDK version: 2.1.2 (08/24/12 14:46 ed7f777)
+[INFO] Titanium SDK version: 2.1.3 (10/02/12 16:16 15997d0)
 [DEBUG] Waiting for device to be ready ...
-[TRACE] adb devices returned 0 devices/emulators
-[TRACE] adb devices returned 0 devices/emulators
-[TRACE] adb devices returned 0 devices/emulators
-[TRACE] adb devices returned 0 devices/emulators
-[TRACE] adb devices returned 0 devices/emulators
-[TRACE] adb devices returned 0 devices/emulators
-[ERROR] Timed out waiting for emulator to be ready, you may need to close the emulator and try again
+[TRACE] adb devices returned 1 devices/emulators
+[DEBUG] Device connected... (waited 0 seconds)
+[DEBUG] waited 0.022099 seconds on emulator to get ready
+[DEBUG] com.e101010.wyn installed? True
+[INFO] Fastdev server running, deploying in Fastdev mode
+[INFO] Copying CommonJS modules...
+[INFO] Copying project resources..
+[TRACE] COPYING MODIFIED FILE: /Users/graham/Documents/Titanium_Studio_Workspace/WYN/Resources/.app.js.swp => /Users/graham/Documents/Titanium_Studio_Workspace/WYN/build/android/bin/assets/Resources/.app.js.swp
+[TRACE] COPYING CREATED FILE: /Users/graham/Documents/Titanium_Studio_Workspace/WYN/Resources/.WYN.js.swp => /Users/graham/Documents/Titanium_Studio_Workspace/WYN/build/android/bin/assets/Resources/.WYN.js.swp
+[TRACE] COPYING MODIFIED FILE: /Users/graham/Documents/Titanium_Studio_Workspace/WYN/Resources/app.js => /Users/graham/Documents/Titanium_Studio_Workspace/WYN/build/android/bin/assets/Resources/app.js
+[TRACE] COPYING CREATED FILE: /Users/graham/Documents/Titanium_Studio_Workspace/WYN/Resources/ui/windows/.ContactDetailWindow.js.swp => /Users/graham/Documents/Titanium_Studio_Workspace/WYN/build/android/bin/assets/Resources/ui/windows/.ContactDetailWindow.js.swp
+[TRACE] COPYING CREATED FILE: /Users/graham/Documents/Titanium_Studio_Workspace/WYN/Resources/ui/windows/.ContactMapWindow.js.swp => /Users/graham/Documents/Titanium_Studio_Workspace/WYN/build/android/bin/assets/Resources/ui/windows/.ContactMapWindow.js.swp
+[TRACE] COPYING CREATED FILE: /Users/graham/Documents/Titanium_Studio_Workspace/WYN/Resources/ui/windows/.ListWindow.js.swp => /Users/graham/Documents/Titanium_Studio_Workspace/WYN/build/android/bin/assets/Resources/ui/windows/.ListWindow.js.swp
+[TRACE] COPYING CREATED FILE: /Users/graham/Documents/Titanium_Studio_Workspace/WYN/Resources/ui/windows/.MyNumberWindow.js.swp => /Users/graham/Documents/Titanium_Studio_Workspace/WYN/build/android/bin/assets/Resources/ui/windows/.MyNumberWindow.js.swp
+[TRACE] COPYING CREATED FILE: /Users/graham/Documents/Titanium_Studio_Workspace/WYN/Resources/ui/windows/.NewNumberWindow.js.swp => /Users/graham/Documents/Titanium_Studio_Workspace/WYN/build/android/bin/assets/Resources/ui/windows/.NewNumberWindow.js.swp
+[TRACE] COPYING CREATED FILE: /Users/graham/Documents/Titanium_Studio_Workspace/WYN/Resources/ui/windows/.SettingsWindow.js.swp => /Users/graham/Documents/Titanium_Studio_Workspace/WYN/build/android/bin/assets/Resources/ui/windows/.SettingsWindow.js.swp
+[TRACE] COPYING CREATED FILE: /Users/graham/Documents/Titanium_Studio_Workspace/WYN/Resources/ui/windows/.ThankYouWindow.js.swp => /Users/graham/Documents/Titanium_Studio_Workspace/WYN/build/android/bin/assets/Resources/ui/windows/.ThankYouWindow.js.swp
+[TRACE] COPYING MODIFIED FILE: /Users/graham/Documents/Titanium_Studio_Workspace/WYN/Resources/ui/windows/.YourDetailsWindow.js.swp => /Users/graham/Documents/Titanium_Studio_Workspace/WYN/build/android/bin/assets/Resources/ui/windows/.YourDetailsWindow.js.swp
+[TRACE] COPYING MODIFIED FILE: /Users/graham/Documents/Titanium_Studio_Workspace/WYN/Resources/ui/windows/ContactDetailWindow.js => /Users/graham/Documents/Titanium_Studio_Workspace/WYN/build/android/bin/assets/Resources/ui/windows/ContactDetailWindow.js
+[TRACE] COPYING MODIFIED FILE: /Users/graham/Documents/Titanium_Studio_Workspace/WYN/Resources/ui/windows/ContactMapWindow.js => /Users/graham/Documents/Titanium_Studio_Workspace/WYN/build/android/bin/assets/Resources/ui/windows/ContactMapWindow.js
+[TRACE] COPYING MODIFIED FILE: /Users/graham/Documents/Titanium_Studio_Workspace/WYN/Resources/ui/windows/ListWindow.js => /Users/graham/Documents/Titanium_Studio_Workspace/WYN/build/android/bin/assets/Resources/ui/windows/ListWindow.js
+[TRACE] COPYING MODIFIED FILE: /Users/graham/Documents/Titanium_Studio_Workspace/WYN/Resources/ui/windows/MyNumberWindow.js => /Users/graham/Documents/Titanium_Studio_Workspace/WYN/build/android/bin/assets/Resources/ui/windows/MyNumberWindow.js
+[TRACE] COPYING MODIFIED FILE: /Users/graham/Documents/Titanium_Studio_Workspace/WYN/Resources/ui/windows/NewNumberWindow.js => /Users/graham/Documents/Titanium_Studio_Workspace/WYN/build/android/bin/assets/Resources/ui/windows/NewNumberWindow.js
+[TRACE] COPYING MODIFIED FILE: /Users/graham/Documents/Titanium_Studio_Workspace/WYN/Resources/ui/windows/SettingsWindow.js => /Users/graham/Documents/Titanium_Studio_Workspace/WYN/build/android/bin/assets/Resources/ui/windows/SettingsWindow.js
+[TRACE] COPYING MODIFIED FILE: /Users/graham/Documents/Titanium_Studio_Workspace/WYN/Resources/ui/windows/ThankYouWindow.js => /Users/graham/Documents/Titanium_Studio_Workspace/WYN/build/android/bin/assets/Resources/ui/windows/ThankYouWindow.js
+[TRACE] COPYING MODIFIED FILE: /Users/graham/Documents/Titanium_Studio_Workspace/WYN/Resources/ui/windows/YourDetailsWindow.js => /Users/graham/Documents/Titanium_Studio_Workspace/WYN/build/android/bin/assets/Resources/ui/windows/YourDetailsWindow.js
+[TRACE] COPYING CREATED FILE: /Users/graham/Documents/Titanium_Studio_Workspace/WYN/Resources/WYN.js => /Users/graham/Documents/Titanium_Studio_Workspace/WYN/build/android/bin/assets/Resources/WYN.js
+[INFO] Tiapp.xml unchanged, skipping class generation
+[DEBUG] Processing Android resource drawables
+[DEBUG] found drawable-long-land-hdpi splash screen at /Users/graham/Documents/Titanium_Studio_Workspace/WYN/Resources/android/images/res-long-land-hdpi/default.png
+[DEBUG] found drawable-long-land-ldpi splash screen at /Users/graham/Documents/Titanium_Studio_Workspace/WYN/Resources/android/images/res-long-land-ldpi/default.png
+[DEBUG] found drawable-long-port-hdpi splash screen at /Users/graham/Documents/Titanium_Studio_Workspace/WYN/Resources/android/images/res-long-port-hdpi/default.png
+[DEBUG] found drawable-long-port-ldpi splash screen at /Users/graham/Documents/Titanium_Studio_Workspace/WYN/Resources/android/images/res-long-port-ldpi/default.png
+[DEBUG] found drawable-notlong-land-hdpi splash screen at /Users/graham/Documents/Titanium_Studio_Workspace/WYN/Resources/android/images/res-notlong-land-hdpi/default.png
+[DEBUG] found drawable-notlong-land-ldpi splash screen at /Users/graham/Documents/Titanium_Studio_Workspace/WYN/Resources/android/images/res-notlong-land-ldpi/default.png
+[DEBUG] found drawable-notlong-land-mdpi splash screen at /Users/graham/Documents/Titanium_Studio_Workspace/WYN/Resources/android/images/res-notlong-land-mdpi/default.png
+[DEBUG] found drawable-notlong-port-hdpi splash screen at /Users/graham/Documents/Titanium_Studio_Workspace/WYN/Resources/android/images/res-notlong-port-hdpi/default.png
+[DEBUG] found drawable-notlong-port-ldpi splash screen at /Users/graham/Documents/Titanium_Studio_Workspace/WYN/Resources/android/images/res-notlong-port-ldpi/default.png
+[DEBUG] found drawable-notlong-port-mdpi splash screen at /Users/graham/Documents/Titanium_Studio_Workspace/WYN/Resources/android/images/res-notlong-port-mdpi/default.png
+[INFO] Waiting for SDCard to become available..
+[INFO] Re-launching application ... WYN
+[INFO] Launching application ... WYN
+[TRACE] Launch output: Starting: Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.e101010.wyn/.WynActivity }
+

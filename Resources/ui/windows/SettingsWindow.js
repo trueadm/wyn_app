@@ -1,6 +1,8 @@
 "use strict";
 
-var Settings = require('data/Settings');
+var _ = require('underscore')._,
+  WYN = require('WYN'),
+  Settings = require('data/Settings');
 
 function SettingsWindow(parentWindow) {
   var bg = '/images/bg_white.png';
@@ -8,21 +10,22 @@ function SettingsWindow(parentWindow) {
     bg = '/images/bg_white-568h.png';
   }
   
-  var self = Ti.UI.createWindow({
+  var self = Ti.UI.createWindow(_.extend({
     title: 'Settings',
-    barColor: 'black',
-    barImage: 'images/navbar_leather.png',
-    backgroundColor: 'white',
     backgroundImage: bg,
     parentWindow: parentWindow
-  });
+  }, WYN.styles.windowBar));
 
-  self.add(Ti.UI.iOS.createAdView({
-    adSize: Ti.UI.iOS.AD_SIZE_PORTRAIT,
-    bottom: 0
-  }));
+  var bottom = 0;
+  if (WYN.osname === 'iphone') {
+    self.add(Ti.UI.iOS.createAdView({
+      adSize: Ti.UI.iOS.AD_SIZE_PORTRAIT,
+      bottom: 0
+    }));
+    bottom = '50dp';
+  }
   
-  var settingsTable = Ti.UI.createTableView({top: 10, bottom: 50});
+  var settingsTable = Ti.UI.createTableView({top: '10dp', bottom: bottom});
   self.add(settingsTable);
   
   // Your name:
@@ -35,10 +38,10 @@ function SettingsWindow(parentWindow) {
   
   // Add text field to row
   var yourNameField = Ti.UI.createTextField({
-    left: 150,
-    width: 160,
-    height: 45,
-    minimumFontSize: 9,
+    left: '150dp',
+    width: '160dp',
+    height: '45dp',
+    minimumFontSize: '9dp',
     color: '#999999',
     borderStyle: Ti.UI.INPUT_BORDERSTYLE_NONE,
     value: Settings.get('name')
@@ -63,11 +66,11 @@ function SettingsWindow(parentWindow) {
   
   // Add text field to row
   var yourNumberField = Ti.UI.createTextField({
-    left: 150,
-    width: 160,
-    height: 45,
+    left: '150dp',
+    width: '160dp',
+    height: '45dp',
     color: '#999999',
-    minimumFontSize: 9,
+    minimumFontSize: '9dp',
     borderStyle: Ti.UI.INPUT_BORDERSTYLE_NONE,
     value: Settings.get('number'),
     keyboardType: Ti.UI.KEYBOARD_PHONE_PAD
@@ -80,6 +83,7 @@ function SettingsWindow(parentWindow) {
   });
   // Update settings on blur
   yourNumberField.addEventListener('blur', function () {
+    // Todo: validate
     Settings.set('number', yourNumberField.value);
   });
   

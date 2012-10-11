@@ -1,7 +1,7 @@
 "use strict";
 
-var AppContacts = require('data/AppContacts'),
-  utils = require('PhoneNumberUtils');
+var AppContacts = require('/data/AppContacts'),
+  utils = require('/PhoneNumberUtils');
 
 function Contact(appContact) {
   if (appContact) {
@@ -11,7 +11,9 @@ function Contact(appContact) {
     this.created = new Date(appContact.created);
        
     // Get data from associated phone contact entry
-    this.setPhoneContact(Ti.Contacts.getPersonByID(this.id));
+    if (this.id) {
+      this.setPhoneContact(Ti.Contacts.getPersonByID(this.id));
+    }
   }
 }
 
@@ -59,8 +61,16 @@ Contact.prototype = {
     var self = this;
 
     var doSave = function () {
+      var phoneContact = self.createPhoneContact();
+      
+      // Android stores ID in a different property
+      if (Ti.Platform.osname === 'android') {
+        self.id = phoneContact.id;  
+      } else {
+        self.id = phoneContact.recordId
+      }
+      
       self.created = new Date().getTime();
-      self.id = self.createPhoneContact().recordId;
       
       Titanium.Geolocation.accuracy = Ti.Geolocation.ACCURACY_HIGH;
       Ti.Geolocation.purpose = 'Tag number with your current location';

@@ -1,7 +1,10 @@
 "use strict";
 
-var NumPadButton = require('ui/buttons/NumPadButton'),
-  utils = require('PhoneNumberUtils');
+var _ = require('underscore')._,
+  WYN = require('WYN'),
+  NumPadButton = require('/ui/buttons/NumPadButton'),
+  utils = require('/PhoneNumberUtils'),
+  YourDetailsWindow = require('/ui/windows/YourDetailsWindow');
 
 function NewNumberWindow(parentWindow) {
   var bg = '/images/bg_numpad.png';
@@ -9,25 +12,23 @@ function NewNumberWindow(parentWindow) {
     bg = '/images/bg_numpad-568h.png';
   }
   
-  var self = Ti.UI.createWindow({
+  var self = Ti.UI.createWindow(_.extend({
     title: 'What’s your number?',
-    barColor: 'black',
-    barImage: '/images/navbar_leather.png',
     backgroundImage: bg,
     parentWindow: parentWindow
-  });
+  }, WYN.styles.windowBar));
   
   //add a label that will display the number
   var numberLabel = Ti.UI.createLabel({
     text: '',
-    font: {fontSize: 50, fontWeight: 'bold', fontFamily: 'Rabiohead'},
-    minimumFontSize: 12,
+    font: {fontSize: '50dp', fontWeight: 'bold', fontFamily: 'Rabiohead'},
+    minimumFontSize: '12dp',
     textAlign: 'center',
-    width: 290,
-    height: 50,
+    height: '50dp',
     color: '#01215b',
-    left: 15,
-    top: 20
+    left: '15dp',
+    right: '15dp',
+    top: '20dp'
   });
   self.add(numberLabel);
   
@@ -107,12 +108,12 @@ function NewNumberWindow(parentWindow) {
   
   //Add Backspace button, next to the 0
   var backspaceButton = Ti.UI.createButton({
-    width: 91,
-    height: 66,
-    top: top,
-    left: leftMargin + colWidth * 2,
-    backgroundImage: 'images/phone_key_backspace.png',
-    backgroundSelectedImage: 'images/phone_key_backspace_down.png',
+    width: '91dp',
+    height: '66dp',
+    top: top + 'dp',
+    left: leftMargin + colWidth * 2 + 'dp',
+    backgroundImage: '/images/phone_key_backspace.png',
+    backgroundSelectedImage: '/images/phone_key_backspace_down.png',
   });
   var click = Ti.Media.createSound({url: '/sounds/click.mp3'});
   backspaceButton.addEventListener('touchend', function () {
@@ -124,12 +125,12 @@ function NewNumberWindow(parentWindow) {
   
   //Add Save button, but it at bottom of screen
   var saveButton = Ti.UI.createButton({
-    width: 91,
-    height: 66,
-    top: top,
-    left: leftMargin,
-    backgroundImage: 'images/phone_key_submit.png',
-    backgroundSelectedImage: 'images/phone_key_submit_down.png',
+    width: '91dp',
+    height: '66dp',
+    top: top + 'dp',
+    left: leftMargin + 'dp',
+    backgroundImage: '/images/phone_key_submit.png',
+    backgroundSelectedImage: '/images/phone_key_submit_down.png',
   });
   self.add(saveButton);
   
@@ -158,7 +159,6 @@ function NewNumberWindow(parentWindow) {
       statusAlert.show();
       
     } else {
-      var YourDetailsWindow = require('ui/windows/YourDetailsWindow');
       //open the window
       self.YourDetailsWindow = new YourDetailsWindow(self);
       self.containingTab.open(self.YourDetailsWindow);      
